@@ -1,7 +1,7 @@
 Project of e-commerce web shop application developed during Data Bases AGH UST Computer Science course
 Used technologies: 
-- ORACLE SQL, 
-- JavaScript
+- MongoDB, 
+- NodeJS with Express framework
 
 Contributors: 
 - [Sebastian Piaskowy](https://github.com/piaccho), 
