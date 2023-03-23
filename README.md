@@ -4,5 +4,5 @@ Used technologies:
 - NodeJS with Express framework
 
 Contributors: 
-- [Sebastian Piaskowy](https://github.com/piaccho), 
+- [Sebastian Piaskowy](https://github.com/piaccho)
 - [Łukasz Dydek](https://github.com/ldydek)
