@@ -2,6 +2,7 @@ Project of e-commerce web shop application developed during Data Bases AGH UST C
 Used technologies: 
 - ORACLE SQL, 
 - JavaScript
+
 Contributors: 
--[Sebastian Piaskowy](https://github.com/piaccho), 
--[Łukasz Dydek](https://github.com/ldydek)
+- [Sebastian Piaskowy](https://github.com/piaccho), 
+- [Łukasz Dydek](https://github.com/ldydek)
