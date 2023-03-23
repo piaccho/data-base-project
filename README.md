@@ -1,4 +1,5 @@
 Project of e-commerce web shop application developed during Data Bases AGH UST Computer Science course
+
 Technolog stack: 
 - React
 - MongoDB
