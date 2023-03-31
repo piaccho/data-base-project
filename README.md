@@ -1,10 +1,12 @@
-Project of e-commerce web shop application developed during Data Bases AGH UST Computer Science course
+# E-Commerce Web Shop database project 
 
-Technolog stack: 
-- React
-- MongoDB
-- NodeJS with Express framework
+Project of e-commerce web shop application developed during Data Bases - AGH UST Computer Science course
 
-Contributors: 
+## Contributors: 
 - [Sebastian Piaskowy](https://github.com/piaccho)
 - [Łukasz Dydek](https://github.com/ldydek)
+
+## Technology stack: 
+- Frontend: React
+- Backend: Express.js
+- Database: MongoDB
