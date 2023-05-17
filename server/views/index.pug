@@ -3,46 +3,88 @@ html(lang='en')
     head
         meta(charset='utf-8')
         meta(name='viewport' content='width=device-width, initial-scale=1')
-        title Second Express application
+        title WebShop server
     body
         main
-            h1 Second Express application
-            if mode
-                form(method='GET' action='/query')
-                    label(for='department') Podaj wydział
+            h1 WebShop server
+            fieldset 
+                h2 Get all products 
+                form(method='GET' action='/products')
+                    input(type='submit', value="Get product")
+            fieldset 
+                h2 Get specific products 
+                form(method='GET' action='/products/:id ')
+                    label(for='department') Product ID
+                    br
                     input(name='department')
                     br
-                    input(type='submit')
-                    input(type='reset')
-            else
-                form(method='POST' action='/')
-                    label(for='name') Give your name
-                    input(name='name')
                     br
-                    input(type='submit')
+                    input(type='submit', value="Get all products")
                     input(type='reset')
-            img(src="/img/logo.png", alt="Logo", style="height: 100px")
-            table
-                if mode
-                    thead
-                        tr
-                            th Nazwisko
-                            th Imię
-                            th Wydział
-                else 
-                    thead
-                        tr
-                            th Nazwisko
-                            th Imię
-                tbody
-                    if mode
-                        each val in students
-                            tr 
-                                td #{val.firstname}
-                                td #{val.secondname}
-                                td #{val.faculty}
-                    else
-                        each val in students
-                            tr 
-                                td #{val.lname}
-                                td #{val.fname}
+            fieldset 
+                h2 Add product
+                form(action="/products", method="POST")
+                    label(for="name") Nazwa:
+                    br
+                    input(type="text", name="name", required)
+                    br
+                    label(for="description") Opis:
+                    br
+                    textarea(name="description", required)
+                    br
+                    label(for="price") Cena:
+                    br
+                    input(type="number", name="price", required)
+                    br
+                    label(for="category") Kategoria:
+                    br
+                    input(type="text", name="category", required)
+                    br
+                    label(for="image") URL zdjęcia:
+                    br
+                    input(type="text", name="name", required)
+                    br
+                    br
+                    input(type="submit", value="Add product")
+                    br
+                    input(type='reset')
+            fieldset 
+                h2 Update product
+                form(action="/products", method="PUT")
+                    label(for="id") Id:
+                    br
+                    input(type="text", name="id", required)
+                    br
+                    label(for="name") Nazwa:
+                    br
+                    input(type="text", name="name", required)
+                    br
+                    label(for="description") Opis:
+                    br
+                    textarea(name="description", required)
+                    br
+                    label(for="price") Cena:
+                    br
+                    input(type="number", name="price", required)
+                    br
+                    label(for="category") Kategoria:
+                    br
+                    input(type="text", name="category", required)
+                    br
+                    label(for="image") URL zdjęcia:
+                    br
+                    input(type="text", name="name", required)
+                    br
+                    br
+                    input(type="submit", value="Update product")
+                    br
+                    input(type='reset')
+            fieldset 
+                h2 Remove product
+                form(action="/products", method="DELETE")
+                    label(for="id") Id:
+                    br
+                    input(type="text", name="id", required)
+                    br
+                    br
+                    input(type="submit", value="Remove product")
