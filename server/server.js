@@ -6,7 +6,7 @@ import {validateAccountData, hashedPassword} from './utility.js'
 
 const port = 8001;
 
-import mongodb from 'mongodb';
+import mongodb, { ObjectId } from 'mongodb';
 
 const MongoClient = mongodb.MongoClient;
 const client = new MongoClient('mongodb://127.0.0.1:27017');
@@ -125,6 +125,7 @@ app.get('/products', async function (req, res) {
 
 // get products by category
 app.get('/products/:category', async function (req, res) {
+    console.log("GET products category");
     const collection = db.collection('products')
     const products = await collection.aggregate([
         {
@@ -180,16 +181,21 @@ app.get('/search_query', async function (req, res) {
     // res.render("products", {data: products}); 
 });
 
-// buy product
-app.get('/buy', async function (req, res) {
-    console.log(req.query);
-    const prodId = req.query._id
-    const quantity = req.query.quantity;
-    db.collection("products").updateOne({"_id": prodId}, {$inc: {units: -quantity}})
-    // db.collection("products").findOneAndUpdate( {query: {_id: req.query._id, units: {$gt: quantity} }, update: {$dec: {units: quantity}}})
-    // const prodName = db.collection("products").find({_id: req.query._id});
-    res.send("Product has been bought");
-});
+
+// // buy product
+// app.get('/buy', async function (req, res) {
+//     console.log(req.query);
+//     const prodId = req.query._id
+//     const quantity = req.query.quantity;
+//     // db.collection('products').updateOne(
+//     //     { _id: ObjectId(prodId) },
+//     //     { $inc: { units: -quantity } }
+//     // );
+//     // db.collection("products").updateOne({"_id": prodId}, {$inc: {units: -quantity}})
+//     // db.collection("products").findOneAndUpdate( {query: {_id: req.query._id, units: {$gt: quantity} }, update: {$dec: {units: quantity}}})
+//     // const prodName = db.collection("products").find({_id: req.query._id});
+//     res.send("Product has been bought");
+// });
 
 
 // // login

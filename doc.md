@@ -17,7 +17,7 @@ Backend naszego projektu oparty jest o serwer w technologii `Node.js` z framewor
 - Listy życzeń:
     - Możliwość tworzenia list życzeń, dodawania produktów do listy, udostępniania ich innym użytkownikom.
 - Powiadomienia:
-    - Informuje użytkowników o istotnych aktualizacjach dotyczących zamówień, dostępności produktów, promocji itp.
+    - Informuje mailowo użytkowników o istotnych aktualizacjach dotyczących zamówień, dostępności produktów, promocji itp.
 - Śledzenie przesyłek:
     - Możliwość śledzenia statusu przesyłek, uzyskania informacji dotyczących przewoźnika i etapu dostawy.
 - Panel administracyjny:
