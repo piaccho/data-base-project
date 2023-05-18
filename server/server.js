@@ -5,14 +5,27 @@ import { fileURLToPath } from 'url';
 
 const port = 8001;
 
-import mongodb from 'mongodb'
-import mongoose from 'mongoose';
+import mongodb from 'mongodb';
+
 const MongoClient = mongodb.MongoClient;
 const client = new MongoClient('mongodb://127.0.0.1:27017');
-await client.connect(err => {
-
-});
+await client.connect();
 const db = client.db('webshop');
+const categories = await db.collection('categories').find().toArray().then(arr => arr.map(o => o.name))
+
+// import mongoose from 'mongoose';
+// async function main() {
+//     await mongoose.connect('mongodb://127.0.0.1:27017/webshop');
+// }
+// main().catch(err => console.log(err));
+// const productSchema = new mongoose.Schema({
+//     name: String,
+//     category: String,
+//     description: String,
+//     price: Number,
+//     image: String,
+// });
+
 
 
 // async function getDbData() {
@@ -45,14 +58,139 @@ app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 
 // main
 app.get('/', async function (request, response) {
-    response.render('index', { db: db}); // Render the 'index' view
+    response.render('index', {categories: categories}); // Render the 'index' view
 });
 
-app.post('/products', async function (request, response) {
-    const collection = db.collection('products');
-    const query = department === "" ? {} : {'faculty': department};
-    students = await collection.find(query).toArray();
-    response.render('index', { db: db}); // Render the 'index' view
+// get all products
+app.get('/products', async function (request, response) {
+    const collection = db.collection('products')
+    const products = await collection.aggregate([
+        {
+            $lookup: {
+            from: "categories", 
+            localField: "category", 
+            foreignField: "_id", 
+            as: "categoryData" 
+            }
+        },
+        {
+            $unwind: "$categoryData" 
+        },
+        {
+            $project: {
+            _id: 1,
+            name: 1,
+            category: "$categoryData.name",
+            description: 1,
+            price: 1,
+            units: 1,
+            image: 1
+            }
+        }
+    ]).toArray();
+    response.render("products", {data: products});
+});
+
+// get products by category
+app.get('/products/:category', async function (request, response) {
+    const collection = db.collection('products')
+    const products = await collection.aggregate([
+        {
+            $lookup: {
+            from: "categories", 
+            localField: "category", 
+            foreignField: "_id", 
+            as: "categoryData" 
+            }
+        },
+        {
+            $unwind: "$categoryData" 
+        },
+        {
+            $match: {
+                "categoryData.name": request.query.category
+                }
+            },
+        {
+            $project: {
+            _id: 1,
+            name: 1,
+            category: "$categoryData.name",
+            description: 1,
+            price: 1,
+            units: 1,
+            image: 1
+            }
+        }
+    ]).toArray();
+    response.render("products", {data: products}); 
+});
+
+// get products by keywords
+app.post('/products/:search_query', async function (request, response) {
+    console.log(request.body);
+    // const collection = db.collection('products')
+    // const products = await collection.aggregate([
+    //     {
+    //         $lookup: {
+    //         from: "categories", 
+    //         localField: "category", 
+    //         foreignField: "_id", 
+    //         as: "categoryData" 
+    //         }
+    //     },
+    //     {
+    //         $unwind: "$categoryData" 
+    //     },
+    //     {
+    //         $match: {
+    //             "categoryData.name": request.query.category
+    //             }
+    //         },
+    //     {
+    //         $project: {
+    //         _id: 1,
+    //         name: 1,
+    //         category: "$categoryData.name",
+    //         description: 1,
+    //         price: 1,
+    //         units: 1,
+    //         image: 1
+    //         }
+    //     }
+    // ]).toArray();
+    // response.render("products", {data: products}); 
+});
+
+// get all products
+app.get('/buy', async function (request, response) {
+    console.log(request.query);
+    // const collection = db.collection('products')
+    // const products = await collection.aggregate([
+    //     {
+    //         $lookup: {
+    //         from: "categories", 
+    //         localField: "category", 
+    //         foreignField: "_id", 
+    //         as: "categoryData" 
+    //         }
+    //     },
+    //     {
+    //         $unwind: "$categoryData" 
+    //     },
+    //     {
+    //         $project: {
+    //         _id: 1,
+    //         name: 1,
+    //         category: "$categoryData.name",
+    //         description: 1,
+    //         price: 1,
+    //         units: 1,
+    //         image: 1
+    //         }
+    //     }
+    // ]).toArray();
+    // response.render("products", {data: products});
 });
 
 

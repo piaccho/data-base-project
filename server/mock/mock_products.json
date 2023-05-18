@@ -1,0 +1,290 @@
+[
+  {
+    "name": "Smartfony iPhone 14 Pro",
+    "category": 1,
+    "description": "Sit duis cupidatat occaecat in laborum ipsum. Et et Lorem sint deserunt cupidatat ut esse ipsum tempor do occaecat ex.",
+    "price": 3700,
+    "units": 40,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Smartfony%20iPhone%20X"
+  },
+  {
+    "name": "Smartfony Samsung Galaxy S20",
+    "category": 1,
+    "description": "In Lorem proident ad ipsum consequat ullamco in in. Reprehenderit id amet velit excepteur ut in amet.",
+    "price": 4400,
+    "units": 110,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Smartfony%20Samsung%20Galaxy%20S20"
+  },
+  {
+    "name": "Telewizor Sony 4K Ultra HD",
+    "category": 1,
+    "description": "Ullamco consequat pariatur Lorem aliquip incididunt deserunt est laboris veniam voluptate. Minim aute veniam anim non sunt consectetur voluptate incididunt ut sit est.",
+    "price": 4300,
+    "units": 40,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Telewizor%20Sony%204K%20Ultra%20HD"
+  },
+  {
+    "name": "Telewizor LG OLED",
+    "category": 1,
+    "description": "Nulla ipsum amet consequat voluptate amet sit sit. Incididunt aliqua mollit culpa sunt aliquip mollit ipsum in non sint labore aliqua cupidatat in.",
+    "price": 7000,
+    "units": 30,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Telewizor%20LG%20OLED"
+  },
+  {
+    "name": "Laptop MacBook Pro",
+    "category": 1,
+    "description": "Aliquip laboris anim veniam est ea magna incididunt dolore nulla id nulla amet. Esse aute nisi irure anim amet minim ad esse.",
+    "price": 3800,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Laptop%20MacBook%20Pro"
+  },
+  {
+    "name": "Laptop Dell XPS",
+    "category": 1,
+    "description": "Magna quis duis incididunt veniam cupidatat. Occaecat aliqua ipsum amet incididunt commodo laboris ad minim veniam in adipisicing non.",
+    "price": 4200,
+    "units": 50,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Laptop%20Dell%20XPS"
+  },
+  {
+    "name": "Sukienka Gucci",
+    "category": 2,
+    "description": "Ea non sit irure enim id sit tempor esse aliquip officia aliqua. Ut dolore deserunt ea dolor sit officia aliqua eiusmod enim quis aliqua cillum nisi.",
+    "price": 1100,
+    "units": 170,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Sukienka+Gucci"
+  },
+  {
+    "name": "Bluza Tommy Hilfiger",
+    "category": 2,
+    "description": "Tempor mollit culpa ipsum consequat irure in ad ad. In elit laborum incididunt duis.",
+    "price": 500,
+    "units": 120,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Bluza+Tommy+Hilfiger"
+  },
+  {
+    "name": "T-Shirt Champion",
+    "category": 2,
+    "description": "Aute magna et ad eiusmod mollit nisi sit cillum Lorem eiusmod adipisicing ipsum. Exercitation cillum dolor do magna ad aute cillum est duis.",
+    "price": 100,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=T-Shirt+Champion"
+  },
+  {
+    "name": "Koszula męska Ralph Lauren ",
+    "category": 2,
+    "description": "Adipisicing nulla ut pariatur ea reprehenderit. Tempor occaecat ullamco reprehenderit voluptate sint enim non do enim excepteur minim et eu culpa.",
+    "price": 600,
+    "units": 10,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Koszula+m%C4%99ska+Ralph+Lauren+"
+  },
+  {
+    "name": "Spodnie jeans Levi",
+    "category": 2,
+    "description": "Aliqua tempor pariatur voluptate magna qui proident commodo ullamco. Exercitation ea aliqua nostrud excepteur cillum.",
+    "price": 400,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Spodnie+jeans+Levi"
+  },
+  {
+    "name": "Buty sportowe Adidas Ultraboost",
+    "category": 2,
+    "description": "Velit ex eiusmod culpa eiusmod ullamco sit culpa ipsum cillum cupidatat cupidatat. Magna aliqua mollit do aute tempor cupidatat tempor eiusmod veniam consequat veniam enim sunt minim.",
+    "price": 500,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Buty+sportowe+Adidas+Ultraboost"
+  },
+  {
+    "name": "Kanapa BlackRedWhite",
+    "category": 3,
+    "description": "Quis nisi Lorem cillum ad non dolore velit qui magna fugiat aliqua et ipsum. Amet irure fugiat dolore labore culpa quis culpa quis mollit.",
+    "price": 1900,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Kanapa+BlackRedWhite"
+  },
+  {
+    "name": "Stół kuchenny Meblar",
+    "category": 3,
+    "description": "Ad ea aliquip amet cillum voluptate nisi sunt amet cupidatat adipisicing ullamco ea nulla. Amet ex dolore sint id ad sunt tempor deserunt ex.",
+    "price": 1000,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=St%C3%B3%C5%82+kuchenny+Meblar"
+  },
+  {
+    "name": "Lodówka BOSCH ",
+    "category": 3,
+    "description": "In ex elit elit aliquip ut anim consequat qui esse. Aute exercitation eu irure aliquip velit sunt et tempor eu elit consectetur.",
+    "price": 1700,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Lod%C3%B3wka+BOSCH+"
+  },
+  {
+    "name": "Pralka Miele",
+    "category": 3,
+    "description": "Consectetur enim nostrud ea Lorem mollit minim ullamco mollit ad labore. Exercitation id dolor commodo consectetur tempor eiusmod et.",
+    "price": 1500,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Pralka+Miele"
+  },
+  {
+    "name": "Kosiarka STILL ",
+    "category": 3,
+    "description": "Sit adipisicing elit est enim aliquip qui ex qui excepteur. Ea velit nostrud enim aute culpa exercitation quis duis fugiat.",
+    "price": 1500,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Kosiarka+STILL+"
+  },
+  {
+    "name": "Podkaszarka STILL",
+    "category": 3,
+    "description": "Nostrud aliqua Lorem ut dolore qui duis officia officia veniam nostrud voluptate ea non velit. Reprehenderit labore ad sint velit et aute consectetur.",
+    "price": 1000,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Podkaszarka+STILL"
+  },
+  {
+    "name": "Harry Potter i Komnata Tajemnic",
+    "category": 4,
+    "description": "Sunt incididunt ad consectetur et magna ipsum sint magna duis pariatur. Non esse voluptate laborum qui est aliquip laboris et ea ullamco est officia.",
+    "price": 100,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Harry+Potter+i+Komnata+Tajemnic"
+  },
+  {
+    "name": "Pułapki myślenia",
+    "category": 4,
+    "description": "Eiusmod voluptate amet velit excepteur officia est commodo laboris velit occaecat do. Aute sunt Lorem amet consectetur aliqua laborum exercitation consequat.",
+    "price": 50,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Pu%C5%82apki+my%C5%9Blenia"
+  },
+  {
+    "name": "50 przepisów siostry Faustyny",
+    "category": 4,
+    "description": "Deserunt fugiat ea eiusmod in aliqua. Excepteur sint nulla id magna pariatur nostrud et est Lorem adipisicing aute magna.",
+    "price": 90,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=50+przepis%C3%B3w+siostry+Faustyny"
+  },
+  {
+    "name": "Baśnie braci Grimm",
+    "category": 4,
+    "description": "Qui occaecat reprehenderit sunt sunt anim cillum. Laborum eiusmod deserunt aliqua Lorem sunt qui exercitation minim nostrud ex minim.",
+    "price": 70,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Ba%C5%9Bnie+braci+Grimm"
+  },
+  {
+    "name": "Python: od podstaw",
+    "category": 4,
+    "description": "Magna dolore elit cupidatat amet cillum pariatur. Amet ea ea nulla elit amet duis excepteur cupidatat dolore excepteur ea reprehenderit.",
+    "price": 100,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Python%3A+od+podstaw"
+  },
+  {
+    "name": "Java: Techniki zaawansowane",
+    "category": 4,
+    "description": "Ullamco aliquip dolor excepteur velit velit do elit commodo ipsum. Esse Lorem tempor Lorem dolor labore eu aliqua.",
+    "price": 90,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Java%3A+Techniki+zaawansowane"
+  },
+  {
+    "name": "Piłka nożna Adidas",
+    "category": 5,
+    "description": "Quis commodo veniam dolore ullamco officia culpa excepteur aliqua voluptate dolore aliquip officia nisi quis. Occaecat deserunt eu tempor laboris ipsum magna esse sint culpa elit.",
+    "price": 200,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Pi%C5%82ka+no%C5%BCna+Adidas"
+  },
+  {
+    "name": "Narty Atomic",
+    "category": 5,
+    "description": "Quis elit veniam cupidatat proident culpa elit adipisicing deserunt exercitation commodo aliqua. Veniam magna dolore Lorem sint eiusmod do velit quis ut voluptate.",
+    "price": 300,
+    "units": 50,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Narty+Atomic"
+  },
+  {
+    "name": "Hantle 50kg Decathlon",
+    "category": 5,
+    "description": "Do consectetur deserunt amet minim dolor nostrud excepteur. Consequat reprehenderit minim velit id velit adipisicing consequat reprehenderit veniam proident veniam ut consectetur.",
+    "price": 300,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Hantle+50kg+Decathlon"
+  },
+  {
+    "name": "Rakieta tenisowa Wilson",
+    "category": 5,
+    "description": "Sit in aute ipsum occaecat dolor laborum sunt consectetur nostrud. Consequat qui nulla in irure qui proident exercitation sunt sint ut ea mollit officia ea.",
+    "price": 100,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Rakieta+tenisowa+Wilson"
+  },
+  {
+    "name": "Okulary do pływania Martes",
+    "category": 5,
+    "description": "Voluptate culpa enim do aute ipsum. Ullamco qui velit Lorem nisi aliqua sit quis.",
+    "price": 200,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Okulary+do+p%C5%82ywania+Martes"
+  },
+  {
+    "name": "Deskorolka Skatepro",
+    "category": 5,
+    "description": "Elit laborum consectetur aliqua culpa laboris ullamco consectetur anim est ad proident ea. Minim velit tempor id magna et pariatur.",
+    "price": 100,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Deskorolka+Skatepro"
+  },
+  {
+    "name": "Witamina C Vita",
+    "category": 6,
+    "description": "Duis enim pariatur exercitation culpa voluptate Lorem in minim. Cillum sit est pariatur consectetur.",
+    "price": 50,
+    "units": 50,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Witamina+C+Vita"
+  },
+  {
+    "name": "Magnez B6 Cardio Magnefar",
+    "category": 6,
+    "description": "Excepteur occaecat cupidatat voluptate quis sunt. Id duis ad consectetur do adipisicing excepteur ipsum ipsum eiusmod occaecat magna.",
+    "price": 80,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Magnez+B6+Cardio+Magnefar"
+  },
+  {
+    "name": "Krem do twarzy z filtrem Garnier ",
+    "category": 6,
+    "description": "Culpa nulla sit Lorem et nulla qui laborum nostrud. Consequat aliqua reprehenderit ut dolor exercitation voluptate et tempor eiusmod occaecat nostrud sunt occaecat.",
+    "price": 60,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Krem+do+twarzy+z+filtrem+Garnier+"
+  },
+  {
+    "name": "Maseczka do twarzy Dove",
+    "category": 6,
+    "description": "Ipsum duis est do sint exercitation eiusmod reprehenderit dolor anim velit ad. Cupidatat cupidatat culpa sit Lorem.",
+    "price": 90,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Maseczka+do+twarzy+Dove"
+  },
+  {
+    "name": "Ciśnieniomierz Omron",
+    "category": 6,
+    "description": "Sit enim voluptate tempor consequat officia pariatur duis nulla dolore aliqua eiusmod consectetur. Qui exercitation nisi amet quis in in consequat voluptate anim fugiat.",
+    "price": 100,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Ci%C5%9Bnieniomierz+Omron"
+  },
+  {
+    "name": "Termometr Microlife",
+    "category": 6,
+    "description": "Ad ad irure sunt mollit ipsum ad sit minim ipsum Lorem. Eiusmod pariatur consequat aliqua magna reprehenderit exercitation.",
+    "price": 50,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Termometr+Microlife"
+  }
+]

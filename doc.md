@@ -1,22 +1,46 @@
 # Dokumentacja
 Backend naszego projektu oparty jest o serwer w technologii `Node.js` z frameworkiem `Express.js` oraz bazą danych w technologii `MongoDB` 
 
+## Planowane funkcjonalności
+- Rejestracja i logowanie użytkowników:
+    - Możliwość tworzenia konta, logowanie i zarządzania swoimi danymi.
+- Zarządzanie kontem:
+    - Możliwość zarządzabnia swoim kontem, aktualizowania danych osobowych, adresu dostawy, preferencji płatności itp.
+- Przeglądanie i wyszukiwanie produktów:
+    - Możliwość przeglądania katalogu produktów, wyszukiwania produktów na podstawie kategorii, słów kluczowych itp.
+- Składanie zamówień:
+    - Możliwość składania zamówienia na podstawie zawartości koszyka, wybierania opcji dostawy i płatności.
+- Zarządzanie zamówieniami:
+    - Możliwość śledzenia statusu zamówień, przeglądania historii zamówień i zarządzania nimi (np. anulowanie zamówienia, zgłaszanie zwrotów).
+- System ocen i recenzji:
+    - Możliwość wystawiania ocen i pisania recenzji na temat produktów.
+- Listy życzeń:
+    - Możliwość tworzenia list życzeń, dodawania produktów do listy, udostępniania ich innym użytkownikom.
+- Powiadomienia:
+    - Informuje użytkowników o istotnych aktualizacjach dotyczących zamówień, dostępności produktów, promocji itp.
+- Śledzenie przesyłek:
+    - Możliwość śledzenia statusu przesyłek, uzyskania informacji dotyczących przewoźnika i etapu dostawy.
+- Panel administracyjny:
+    - Dla administratorów aplikacji umożliwia zarządzanie produktami, kategoriami, zamówieniami, klientami, promocjami itp.
+
 
 ## Schemat bazy danych
 ### Specyfikacja kolekcji
 
+Część mock danych zostało wygenerowane przy pomocy [JSON GENERATOR](https://json-generator.com/)
+
 #### 1. ***customers*** (Klienci):
 
 Opis:
-- `_id` - identyfikator klienta
-- `firstname` - imię klienta 
-- `lastname` - nazwisko klienta
-- `email` - adres e-mail klienta
-- `phone` - nr telefonu klienta
-- `address` - adres klienta
-- `login` - login klienta
-- `password` - hasło klienta (haszowane przy użyciu biblioteki bcryptjs)
-- `registered` - data rejestracji konta klienta
+- `_id` - ObjectId (identyfikator klienta)
+- `firstname` - String (imię klienta )
+- `lastname` - String (nazwisko klienta)
+- `email` - String (adres e-mail klienta)
+- `phone` - String (nr telefonu klienta)
+- `address` - String (adres klienta)
+- `login` - String (login klienta)
+- `password` - String (hasło klienta (haszowane przy użyciu biblioteki bcryptjs))
+- `registered` - Date (data rejestracji konta klienta (jako format ISO 8601))
 
 
 Przykładowy dokument:
@@ -27,38 +51,16 @@ Przykładowy dokument:
     "firstname": "John",
     "lastname": "Smith",
     "email": "jsmith@gmail.com",
-    "phone": "+ ",
-    "address": " ",
+    "phone": "(415) 555-2671",
+    "address": "56 Gotham Avenue, Nanafalia, Michigan",
     "login": "jsmith123",
     "password": "$2a$10$W76xT6.M1Qm8X89gP1HAN.WJJ/LHCRFkma6O7R0YZfAOMzmZYWqPi",
-    "registerDate": "2023-05-16 20:27:21"
+    "registerDate": "2023-03-03T21:43:01.849Z"
 }
 ```
 
-Przykładowy dokument
-```json
-{
-    
-}
-```
-#### 2. ***suppliers*** (Dostawcy):
 
-Opis:
-- `_id` - ObjectId
-- `companyName` - String
-- `email` - String
-- `city` - String
-- `street` - String
-- `postalCode` - String
-- `phone` - String
-
-Przykładowy dokument
-```json
-{
-    
-}
-```
-#### 3. ***categories*** (Kategorie):
+#### 2. ***categories*** (Kategorie):
 
 Opis:
 - `_id` - ObjectId
@@ -67,41 +69,34 @@ Opis:
 Przykładowy dokument
 ```json
 {
-    
+    "_id": 1,
+    "name": "Elektronika"
 }
 ```
-#### 4. ***products*** (Produkty):
+#### 3. ***products*** (Produkty):
 
 Opis:
 - `_id` - ObjectId
 - `name` - String
+- `category` - ObjectId (referencja do Kategorii)
 - `description` - String
 - `price` - Number
-- `category` - ObjectId (referencja do Kategorii)
+- `units` - Number
 - `image` - String (ścieżka do obrazka)
 
 Przykładowy dokument
 ```json
 {
-    
+    "name": "Spodnie jeans Levi",
+    "category": 2,
+    "description": "Aliqua tempor pariatur voluptate magna qui proident commodo ullamco. Exercitation ea aliqua nostrud excepteur cillum.",
+    "price": 400,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Spodnie+jeans+Levi"
 }
 ```
-#### 5. ***carts*** (Koszyki):
 
-Opis:
-- `_id` - ObjectId
-- `user` - ObjectId (referencja do Użytkownika)
-- `products` - Array of Objects
-- `product` - ObjectId (referencja do Produktu)
-- `quantity` - Number
-
-Przykładowy dokument
-```json
-{
-    
-}
-```
-#### 6. ***orders*** (Zamówienia):
+#### 4. ***orders*** (Zamówienia):
 
 Opis:
 - `_id` - ObjectId
@@ -116,10 +111,10 @@ Opis:
 Przykładowy dokument
 ```json
 {
-    
+
 }
 ```
-#### 7. ***reviews*** (Recenzje):
+#### 5. ***reviews*** (Oceny):
 
 Opis:
 - `_id` - ObjectId
@@ -131,10 +126,28 @@ Opis:
 Przykładowy dokument
 ```json
 {
-    
+
 }
 ```
-#### 8. ***wishlists*** (Listy życzeń):
+#### 6. ***suppliers*** (Dostawcy):
+
+Opis:
+- `_id` - ObjectId
+- `companyName` - String
+- `email` - String
+- `city` - String
+- `street` - String
+- `postalCode` - String
+- `phone` - String
+
+Przykładowy dokument
+```json
+{
+
+}
+```
+
+#### 7. ***wishlists*** (Listy życzeń):
 
 Opis:
 - `_id` - ObjectId
@@ -144,49 +157,6 @@ Opis:
 Przykładowy dokument
 ```json
 {
-    
+
 }
 ```
-#### 9. ***payments*** (Płatności):
-
-Opis:
-- `_id` - ObjectId
-- `user` - ObjectId (referencja do Użytkownika)
-- `order` - ObjectId (referencja do Zamówienia)
-- `amount` - Number (kwota płatności)
-- `paymentMethod` - String (metoda płatności, np. "karta kredytowa", "przelew bankowy")
-- `status` - String (status płatności, np. "sukces", "odrzucono", "w trakcie")
-
-Przykładowy dokument
-```json
-{
-    
-}
-```
-#### 10. ***promotions*** (Promocje):
-
-Opis:
-- `_id` - ObjectId
-- `name` - String (nazwa promocji)
-- `description` - String (opis promocji)
-- `startDate` - Date (data rozpoczęcia promocji)
-- `endDate` - Date (data zakończenia promocji)
-- `products` - Array of ObjectId (referencje do Produktów objętych promocją)
-
-Przykładowy dokument
-```json
-{
-    
-}
-```
-#### 11. ***shipping*** (Wysyłka):
-
-Opis:
-- `_id` - ObjectId
-- `order` - ObjectId (referencja do Zamówienia)
-- `address` - String (adres dostawy)
-- `city` - String (miasto)
-- `country` - String (kraj)
-- `postalCode` - String (kod pocztowy)
-- `trackingNumber` - String (numer śledzenia przesyłki)
-- `status` - String (status wysyłki, np. "w trakcie", "dostarczono")

@@ -6,85 +6,69 @@ html(lang='en')
         title WebShop server
     body
         main
-            h1 WebShop server
+            h1 WebShop server features testing 
+            fieldset 
+                h2 Register an account 
+                form(method='POST' action='/register')
+                    label(for="firstname") Imię:
+                    br
+                    input(type="text", name="firstname", required)
+                    br
+                    label(for="lastname") Nazwisko:
+                    br
+                    input(type="text", name="lastname", required)
+                    br
+                    label(for="email") Adres e-mail:
+                    br
+                    input(type="text", name="email", required)
+                    br
+                    label(for="phone") Telefon:
+                    br
+                    input(type="text", name="phone", required)
+                    br
+                    label(for="address") Adres:
+                    br
+                    input(type="text", name="address", required)
+                    br
+                    label(for="login") Login:
+                    br
+                    input(type="text", name="login", required)
+                    br
+                    label(for="email") Adres email:
+                    br
+                    input(type="text", name="email", required)
+                    br
+                    label(for="password") Hasło:
+                    br
+                    input(type="password", name="password", required)
+                    br
+                    br
+                    input(type="submit", value="Create an account")
+                    br
+                    input(type='reset')
             fieldset 
                 h2 Get all products 
                 form(method='GET' action='/products')
-                    input(type='submit', value="Get product")
-            fieldset 
-                h2 Get specific products 
-                form(method='GET' action='/products/:id ')
-                    label(for='department') Product ID
-                    br
-                    input(name='department')
-                    br
-                    br
                     input(type='submit', value="Get all products")
-                    input(type='reset')
             fieldset 
-                h2 Add product
-                form(action="/products", method="POST")
-                    label(for="name") Nazwa:
-                    br
-                    input(type="text", name="name", required)
-                    br
-                    label(for="description") Opis:
-                    br
-                    textarea(name="description", required)
-                    br
-                    label(for="price") Cena:
-                    br
-                    input(type="number", name="price", required)
-                    br
+                h2 Get products by category 
+                form(method='GET' action='/products')
                     label(for="category") Kategoria:
                     br
-                    input(type="text", name="category", required)
-                    br
-                    label(for="image") URL zdjęcia:
-                    br
-                    input(type="text", name="name", required)
+                    select(name="category", required)
+                        each c in categories
+                            option(value=c) #{c}
                     br
                     br
-                    input(type="submit", value="Add product")
-                    br
+                    input(type='submit', value="Get products")
                     input(type='reset')
             fieldset 
-                h2 Update product
-                form(action="/products", method="PUT")
-                    label(for="id") Id:
+                h2 Get products by keywords 
+                form(method='POST' action='/products')
+                    label(for='search_query') Search bar:
                     br
-                    input(type="text", name="id", required)
-                    br
-                    label(for="name") Nazwa:
-                    br
-                    input(type="text", name="name", required)
-                    br
-                    label(for="description") Opis:
-                    br
-                    textarea(name="description", required)
-                    br
-                    label(for="price") Cena:
-                    br
-                    input(type="number", name="price", required)
-                    br
-                    label(for="category") Kategoria:
-                    br
-                    input(type="text", name="category", required)
-                    br
-                    label(for="image") URL zdjęcia:
-                    br
-                    input(type="text", name="name", required)
+                    input(name='search_query')
                     br
                     br
-                    input(type="submit", value="Update product")
-                    br
+                    input(type='submit', value="Get products")
                     input(type='reset')
-            fieldset 
-                h2 Remove product
-                form(action="/products", method="DELETE")
-                    label(for="id") Id:
-                    br
-                    input(type="text", name="id", required)
-                    br
-                    br
-                    input(type="submit", value="Remove product")
