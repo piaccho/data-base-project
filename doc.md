@@ -59,7 +59,6 @@ Przykładowy dokument:
 }
 ```
 
-
 #### 2. ***categories*** (Kategorie):
 
 Opis:
@@ -100,7 +99,7 @@ Przykładowy dokument
 
 Opis:
 - `_id` - ObjectId
-- `user` - ObjectId (referencja do Użytkownika)
+- `customer` - ObjectId (referencja do Klienta)
 - `products` - Array of Objects
 - `product` - ObjectId (referencja do Produktu)
 - `quantity` - Number
@@ -118,7 +117,7 @@ Przykładowy dokument
 
 Opis:
 - `_id` - ObjectId
-- `user` - ObjectId (referencja do Użytkownika)
+- `customer` - ObjectId (referencja do Klienta)
 - `product` - ObjectId (referencja do Produktu)
 - `rating` - Number (ocena produktu)
 - `comment` - String (komentarz)
@@ -151,7 +150,7 @@ Przykładowy dokument
 
 Opis:
 - `_id` - ObjectId
-- `user` - ObjectId (referencja do Użytkownika)
+- `customer` - ObjectId (referencja do Klienta)
 - `products` - Array of ObjectId (referencje do Produktów)
 
 Przykładowy dokument

@@ -185,38 +185,10 @@ app.get('/buy', async function (req, res) {
     console.log(req.query);
     const prodId = req.query._id
     const quantity = req.query.quantity;
-    // db.collection("products").update({"_id": prodId}, {$dec: {units: quantity}})
+    db.collection("products").updateOne({"_id": prodId}, {$inc: {units: -quantity}})
     // db.collection("products").findOneAndUpdate( {query: {_id: req.query._id, units: {$gt: quantity} }, update: {$dec: {units: quantity}}})
-    const prodName = db.collection("products").find({_id: req.query._id});
+    // const prodName = db.collection("products").find({_id: req.query._id});
     res.send("Product has been bought");
-    // console.log(prodName);
-    // const collection = db.collection('products')
-    // const products = await collection.aggregate([
-    //     {
-    //         $lookup: {
-    //         from: "categories", 
-    //         localField: "category", 
-    //         foreignField: "_id", 
-    //         as: "categoryData" 
-    //         }
-    //     },
-    //     {
-    //         $unwind: "$categoryData" 
-    //     },
-    //     {
-    //         $project: {
-    //         _id: 1,
-    //         name: 1,
-    //         category: "$categoryData.name",
-    //         description: 1,
-    //         price: 1,
-    //         units: 1,
-    //         image: 1
-    //         }
-    //     }
-    // ]).toArray();
-    // res.render("products", {data: products});
-    // res.send(`Product`)
 });
 
 
