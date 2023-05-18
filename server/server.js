@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {validateAccountData, hashedPassword} from './utility.js'
 
 const port = 8001;
 
@@ -12,7 +13,12 @@ const client = new MongoClient('mongodb://127.0.0.1:27017');
 await client.connect();
 const db = client.db('webshop');
 const categories = await db.collection('categories').find().toArray().then(arr => arr.map(o => o.name))
-
+// const users = await db.collection('customers').find().toArray().then(arr => arr.map(o => 
+//     {
+//         username: o.login, 
+//         password: o.password
+//     }
+//     ));
 // import mongoose from 'mongoose';
 // async function main() {
 //     await mongoose.connect('mongodb://127.0.0.1:27017/webshop');
@@ -26,14 +32,6 @@ const categories = await db.collection('categories').find().toArray().then(arr =
 //     image: String,
 // });
 
-
-
-// async function getDbData() {
-//     const collection = db.collection('students');
-//     const query = department === "" ? {} : {'faculty': department};
-//     students = await collection.find(query).toArray();
-//     client.close();
-// }
 
 /* *************************** */
 /* Configuring the application */
@@ -57,12 +55,46 @@ app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 /* ******** */
 
 // main
-app.get('/', async function (request, response) {
-    response.render('index', {categories: categories}); // Render the 'index' view
+app.get('/', async function (req, res) {
+    res.render('index', {categories: categories}); // Render the 'index' view
+});
+
+// register an account
+app.post('/register', async (req, res) => {
+    console.log(req.body);
+    if(validateAccountData(req.body, res) !== null) {
+        const {
+            firstname,
+            lastname,
+            email,
+            phone,
+            address,
+            login,
+            password
+        } = req.body;
+        // const password = await hashedPassword(req.body.password);
+        // const logins = await db.collection('customers').find().toArray().then(arr => arr.map(o => o.login))
+        // console.log(logins);
+        db.collection('customers').insertOne({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            phone: phone,
+            address: address,
+            login: login,
+            password: password,
+        })
+        res.send("Registration was successfull")
+    }
+});
+
+// show users
+app.get('/users', (req, res) => {
+    res.json(db.collection("customers").find());
 });
 
 // get all products
-app.get('/products', async function (request, response) {
+app.get('/products', async function (req, res) {
     const collection = db.collection('products')
     const products = await collection.aggregate([
         {
@@ -88,11 +120,11 @@ app.get('/products', async function (request, response) {
             }
         }
     ]).toArray();
-    response.render("products", {data: products});
+    res.render("products", {data: products});
 });
 
 // get products by category
-app.get('/products/:category', async function (request, response) {
+app.get('/products/:category', async function (req, res) {
     const collection = db.collection('products')
     const products = await collection.aggregate([
         {
@@ -108,9 +140,9 @@ app.get('/products/:category', async function (request, response) {
         },
         {
             $match: {
-                "categoryData.name": request.query.category
+                "categoryData.name": req.query.category
                 }
-            },
+        },
         {
             $project: {
             _id: 1,
@@ -123,12 +155,41 @@ app.get('/products/:category', async function (request, response) {
             }
         }
     ]).toArray();
-    response.render("products", {data: products}); 
+    res.render("products", {data: products}); 
 });
 
 // get products by keywords
-app.post('/products/:search_query', async function (request, response) {
-    console.log(request.body);
+app.get('/search_query', async function (req, res) {
+    const { query } = req.query; 
+    try {
+        // Wyszukaj produkty, które pasują do zadanego słowa kluczowego
+        const products = await db.collection('products').find({
+            $or: [
+            { name: { $regex: query, $options: 'i' } },
+            { description: { $regex: query, $options: 'i' } },
+            ]
+        })
+        .toArray();
+        console.log(products);
+        res.render('products', {data: products})
+    } catch (error) {
+        console.error('Error searching for products:', error);
+        res.status(500).send('An error occurred');
+    }
+    
+    // res.render("products", {data: products}); 
+});
+
+// buy product
+app.get('/buy', async function (req, res) {
+    console.log(req.query);
+    const prodId = req.query._id
+    const quantity = req.query.quantity;
+    // db.collection("products").update({"_id": prodId}, {$dec: {units: quantity}})
+    // db.collection("products").findOneAndUpdate( {query: {_id: req.query._id, units: {$gt: quantity} }, update: {$dec: {units: quantity}}})
+    const prodName = db.collection("products").find({_id: req.query._id});
+    res.send("Product has been bought");
+    // console.log(prodName);
     // const collection = db.collection('products')
     // const products = await collection.aggregate([
     //     {
@@ -143,11 +204,6 @@ app.post('/products/:search_query', async function (request, response) {
     //         $unwind: "$categoryData" 
     //     },
     //     {
-    //         $match: {
-    //             "categoryData.name": request.query.category
-    //             }
-    //         },
-    //     {
     //         $project: {
     //         _id: 1,
     //         name: 1,
@@ -159,90 +215,64 @@ app.post('/products/:search_query', async function (request, response) {
     //         }
     //     }
     // ]).toArray();
-    // response.render("products", {data: products}); 
-});
-
-// get all products
-app.get('/buy', async function (request, response) {
-    console.log(request.query);
-    // const collection = db.collection('products')
-    // const products = await collection.aggregate([
-    //     {
-    //         $lookup: {
-    //         from: "categories", 
-    //         localField: "category", 
-    //         foreignField: "_id", 
-    //         as: "categoryData" 
-    //         }
-    //     },
-    //     {
-    //         $unwind: "$categoryData" 
-    //     },
-    //     {
-    //         $project: {
-    //         _id: 1,
-    //         name: 1,
-    //         category: "$categoryData.name",
-    //         description: 1,
-    //         price: 1,
-    //         units: 1,
-    //         image: 1
-    //         }
-    //     }
-    // ]).toArray();
-    // response.render("products", {data: products});
+    // res.render("products", {data: products});
+    // res.send(`Product`)
 });
 
 
-// basic CRUDs for all collections
+// // login
+// app.post('/login', (req, res) => {
+//   const { username, password } = req.body;
 
-// get all elements from collection
-// app.get('/', async function (request, response) {
-//     await getDbData();
-//     response.render('index', { db: db}); // Render the 'index' view
+//   // Sprawdzanie, czy użytkownik istnieje i czy podane hasło jest poprawne
+//   const user = users.find(user => user.username === username && user.password === password);
+//   if (!user) {
+//     return res.status(401).json({ message: 'Niepoprawne dane logowania' });
+//   }
+
+//   // create session
+//   req.session = {
+//     user: {
+//       username: user.username
+//     }
+//   };
+
+//   res.json({ message: 'Zalogowano pomyślnie'});
 // });
 
-// // get a specific element from collection
-// app.get('/', async function (request, response) {
-//     await getDbData();
-//     response.render('index', { db: db}); // Render the 'index' view
+// // auth middleware
+// const authenticateUser = (req, res, next) => {
+//   if (!req.session || !req.session.user) {
+//     return res.status(401).json({ message: 'No auth' });
+//   }
+
+//   // Przekazanie informacji o zalogowanym użytkowniku do kolejnych handlerów
+//   res.locals.user = req.session.user;
+//   next();
+// };
+
+// // customer panel
+// app.get('/client', authenticateUser, (req, res) => {
+//   if (res.locals.user.role !== 'client') {
+//     return res.status(403).json({ message: 'Brak uprawnień' });
+//   }
+
+//   // logic
+
+//   res.json({ message: 'Customer panel' });
 // });
 
-// // add a new element from collection
-// app.get('/', async function (request, response) {
-//     await getDbData();
-//     response.render('index', { db: db}); // Render the 'index' view
+// // admin panel
+// app.get('/admin', authenticateUser, (req, res) => {
+//   if (res.locals.user.role !== 'admin') {
+//     return res.status(403).json({ message: 'Brak uprawnień' });
+//   }
+
+//   // logic
+  
+//   res.json({ message: 'Admin panel' });
 // });
 
-// // update an element from collection
-// app.get('/', async function (request, response) {
-//     await getDbData();
-//     response.render('index', { db: db}); // Render the 'index' view
-// });
-
-// // remove an element from collection
-// app.get('/', async function (request, response) {
-//     await getDbData();
-//     response.render('index', { db: db}); // Render the 'index' view
-// });
-
-
-
-
-// app.get('/submit', function (request, response) {
-//     response.set('Content-Type', 'text/plain')
-//     response.send(`Hello ${request.query.name}`); // Send a response to the browser
-// });
-
-// app.post('/', function (request, response) {
-//     response.set('Content-Type', 'text/plain')
-//     response.send(`Hello ${request.body.name}`);
-// });
-
-// app.get('/query', async function(request, response) {
-//     // await getDbData(request.query.department);
-//     // response.render('index', { mode: true, students: students}); 
-// })
 
 /* ************************************************ */
 

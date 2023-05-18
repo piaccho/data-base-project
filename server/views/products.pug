@@ -7,34 +7,37 @@ html(lang='en')
     body
         main
             h2 Products
-            table
-                thead
-                    tr
-                        th image
-                        th id
-                        th name
-                        th category
-                        th description
-                        th price
-                        th units
-                tbody
-                    each row in data
-                        tr         
-                            td
-                                img(src=row.image, alt="product_img", style="height: 100px")
-                            td #{row._id}
-                            td #{row.name}
-                            td #{row.category}
-                            td #{row.description}
-                            td #{row.price} zł
-                            td #{row.units}
-                            td
-                                form(method='GET' action='/buy')
-                                    label(for="quantity") Liczba sztuk:
-                                    br
-                                    input(type="text", name="quantity", maxlength="4", required)
-                                    br
-                                    input(type="hidden", name="_id", value=row._id)
-                                    input(type="submit", value="Buy product")
+            if data.length == 0
+                h3 Nie znaleziono produktów
+            else
+                table
+                    thead
+                        tr
+                            th image
+                            th id
+                            th name
+                            th category
+                            th description
+                            th price
+                            th units
+                    tbody
+                        each row in data
+                            tr         
+                                td
+                                    img(src=row.image, alt="product_img", style="height: 100px")
+                                td #{row._id}
+                                td #{row.name}
+                                td #{row.category}
+                                td #{row.description}
+                                td #{row.price} zł
+                                td #{row.units}
+                                td
+                                    form(method='GET' action='/buy')
+                                        label(for="quantity") Liczba sztuk:
+                                        br
+                                        input(type="text", name="quantity", maxlength="4", required)
+                                        br
+                                        input(type="hidden", name="_id", value=row._id)
+                                        input(type="submit", value="Buy product")
 
                                 

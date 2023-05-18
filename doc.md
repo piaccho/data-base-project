@@ -39,7 +39,7 @@ Opis:
 - `phone` - String (nr telefonu klienta)
 - `address` - String (adres klienta)
 - `login` - String (login klienta)
-- `password` - String (hasło klienta (haszowane przy użyciu biblioteki bcryptjs))
+- `password` - String (hasło klienta (docelowo haszowane przy użyciu biblioteki bcryptjs))
 - `registered` - Date (data rejestracji konta klienta (jako format ISO 8601))
 
 
