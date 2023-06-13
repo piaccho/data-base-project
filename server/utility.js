@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 
-export function validateAccountData(data, res) {
-    const { firstname, lastname, address, phone, email, login, password } = data;
+export async function validateAccountData(data, res) {
+    const { firstname, lastname, address, phone, email, username, password } = data;
 
     // Walidacja danych wejściowych
     if (
@@ -10,11 +10,12 @@ export function validateAccountData(data, res) {
         !address ||
         !phone ||
         !email ||
-        !login ||
+        !username ||
         !password
     ) {
         return res.status(400).send("Please provide all required fields");
     }
+
 
     // Walidacja imienia i nazwiska
     if (!/^[a-zA-Z\-]+$/i.test(firstname) || !/^[a-zA-Z\-]+$/i.test(lastname)) {
@@ -36,9 +37,9 @@ export function validateAccountData(data, res) {
         return res.status(400).send("Invalid email address");
     }
 
-    // Walidacja loginu (co najmniej 5 znaków)
-    if (login.length < 5) {
-        return res.status(400).send("Invalid login");
+    // Walidacja usernameu (co najmniej 5 znaków)
+    if (username.length < 5) {
+        return res.status(400).send("Invalid username");
     }
 
     // Walidacja hasła (co najmniej 8 znaków i zawierało co najmniej jedną dużą literę i cyfrę)
@@ -49,26 +50,18 @@ export function validateAccountData(data, res) {
     ) {
         return res.status(400).send("Invalid password");
     }
+
+    const usernamesOrPhoneNumbers = await db.collection('users').find({ $or: [ { username: username }, { phone: phone } ] }).toArray();
+    if (usernamesOrPhoneNumbers.length === 0) {
+        return res.status(400).send("Username or phone number exists");
+    }
 }
 
-export async function hashedPassword(data, res) {
-    async function hashPassword(password) {
-        try {
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(password, salt);
-            return hashedPassword;
-        } catch (error) {
-            throw new Error("Błąd podczas haszowania hasła");
-        }
-    }
+export function hashPassword(password) {
+    // ustawić dyskretne hashowanie
+    return bcrypt.hashSync(password, 8);
+}
 
-    return await hashPassword(data.password)
-        .then((hashedPassword) => {
-            console.log("Hasło zahaszowane:", hashedPassword);
-            return hashPassword;
-        })
-        .catch((error) => {
-            console.error("Wystąpił błąd:", error);
-            return null;
-        });
+export function checkPassword(password, db) {
+    return bcrypt.compareSync(password, hash);
 }

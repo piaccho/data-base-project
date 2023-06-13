@@ -21,7 +21,7 @@ Backend naszego projektu oparty jest o serwer w technologii `Node.js` z framewor
 - Śledzenie przesyłek:
     - Możliwość śledzenia statusu przesyłek, uzyskania informacji dotyczących przewoźnika i etapu dostawy.
 - Panel administracyjny:
-    - Dla administratorów aplikacji umożliwia zarządzanie produktami, kategoriami, zamówieniami, klientami, promocjami itp.
+    - Dla administratorów aplikacji umożliwia zarządzanie produktami, kategoriami, zamówieniami, użytkownikami, promocjami itp.
 
 
 ## Schemat bazy danych
@@ -29,18 +29,18 @@ Backend naszego projektu oparty jest o serwer w technologii `Node.js` z framewor
 
 Część mock danych zostało wygenerowane przy pomocy [JSON GENERATOR](https://json-generator.com/)
 
-#### 1. ***customers*** (Klienci):
+#### 1. ***users*** (Użytkownicy):
 
 Opis:
-- `_id` - ObjectId (identyfikator klienta)
-- `firstname` - String (imię klienta )
-- `lastname` - String (nazwisko klienta)
-- `email` - String (adres e-mail klienta)
-- `phone` - String (nr telefonu klienta)
-- `address` - String (adres klienta)
-- `login` - String (login klienta)
-- `password` - String (hasło klienta (docelowo haszowane przy użyciu biblioteki bcryptjs))
-- `registered` - Date (data rejestracji konta klienta (jako format ISO 8601))
+- `_id` - ObjectId (identyfikator użytkownika)
+- `firstname` - String (imię użytkownika )
+- `lastname` - String (nazwisko użytkownika)
+- `email` - String (adres e-mail użytkownika)
+- `phone` - String (nr telefonu użytkownika)
+- `address` - String (adres użytkownika)
+- `login` - String (login użytkownika)
+- `password` - String (hasło użytkownika (docelowo haszowane przy użyciu biblioteki bcryptjs))
+- `registered` - Date (data rejestracji konta użytkownika (jako format ISO 8601))
 
 
 Przykładowy dokument:
@@ -99,9 +99,8 @@ Przykładowy dokument
 
 Opis:
 - `_id` - ObjectId
-- `customer` - ObjectId (referencja do Klienta)
+- `user` - ObjectId (referencja do Użytkownika)
 - `products` - Array of Objects
-- `product` - ObjectId (referencja do Produktu)
 - `quantity` - Number
 - `total` - Number
 - `address` - String
@@ -117,7 +116,7 @@ Przykładowy dokument
 
 Opis:
 - `_id` - ObjectId
-- `customer` - ObjectId (referencja do Klienta)
+- `user` - ObjectId (referencja do Użytkownika)
 - `product` - ObjectId (referencja do Produktu)
 - `rating` - Number (ocena produktu)
 - `comment` - String (komentarz)
@@ -150,7 +149,7 @@ Przykładowy dokument
 
 Opis:
 - `_id` - ObjectId
-- `customer` - ObjectId (referencja do Klienta)
+- `user` - ObjectId (referencja do Użytkownika)
 - `products` - Array of ObjectId (referencje do Produktów)
 
 Przykładowy dokument

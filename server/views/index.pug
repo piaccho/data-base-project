@@ -8,6 +8,32 @@ html(lang='en')
         main
             h1 WebShop server features testing 
             fieldset 
+                h2 Get all products 
+                form(method='GET' action='/products')
+                    input(type='submit', value="Get all products")
+            fieldset 
+                h2 Get products by category 
+                form(method='GET' action='/products/category')
+                    label(for="category") Kategoria:
+                    br
+                    select(name="category", required)
+                        each c in categories
+                            option(value=c) #{c}
+                    br
+                    br
+                    input(type='submit', value="Get products")
+                    input(type='reset')
+            fieldset 
+                h2 Get products by keywords 
+                form(method='GET' action='/search_query')
+                    label(for='query') Search bar:
+                    br
+                    input(name='query')
+                    br
+                    br
+                    input(type='submit', value="Get products")
+                    input(type='reset')
+            fieldset 
                 h2 Register an account 
                 form(method='POST' action='/register')
                     label(for="firstname") Imię:
@@ -30,9 +56,9 @@ html(lang='en')
                     br
                     input(type="text", name="email", required)
                     br
-                    label(for="login") Login:
+                    label(for="username") Nazwa użytkownika:
                     br
-                    input(type="text", name="login", required)
+                    input(type="text", name="username", required)
                     br
                     label (co najmniej 5 znaków)
                     br
@@ -61,29 +87,4 @@ html(lang='en')
                     input(type="submit", value="Login")
                     br
                     input(type='reset')
-            fieldset 
-                h2 Get all products 
-                form(method='GET' action='/products')
-                    input(type='submit', value="Get all products")
-            fieldset 
-                h2 Get products by category 
-                form(method='GET' action='/products/category')
-                    label(for="category") Kategoria:
-                    br
-                    select(name="category", required)
-                        each c in categories
-                            option(value=c) #{c}
-                    br
-                    br
-                    input(type='submit', value="Get products")
-                    input(type='reset')
-            fieldset 
-                h2 Get products by keywords 
-                form(method='GET' action='/search_query')
-                    label(for='query') Search bar:
-                    br
-                    input(name='query')
-                    br
-                    br
-                    input(type='submit', value="Get products")
-                    input(type='reset')
+            

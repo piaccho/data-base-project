@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {validateAccountData, hashedPassword} from './utility.js'
+import {validateAccountData, hashPassword, checkPassword} from './utility.js'
 
 const port = 8001;
 
@@ -59,38 +59,9 @@ app.get('/', async function (req, res) {
     res.render('index', {categories: categories}); // Render the 'index' view
 });
 
-// register an account
-app.post('/register', async (req, res) => {
-    console.log(req.body);
-    if(validateAccountData(req.body, res) !== null) {
-        const {
-            firstname,
-            lastname,
-            email,
-            phone,
-            address,
-            login,
-            password
-        } = req.body;
-        // const password = await hashedPassword(req.body.password);
-        // const logins = await db.collection('customers').find().toArray().then(arr => arr.map(o => o.login))
-        // console.log(logins);
-        db.collection('customers').insertOne({
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            phone: phone,
-            address: address,
-            login: login,
-            password: password,
-        })
-        res.send("Registration was successfull")
-    }
-});
-
-// show users
-app.get('/users', (req, res) => {
-    res.json(db.collection("customers").find());
+// show customers
+app.get('/customers', async (req, res) => {
+    res.json(await db.collection("customers").find().toArray());
 });
 
 // get all products
@@ -179,6 +150,45 @@ app.get('/search_query', async function (req, res) {
     }
     
     // res.render("products", {data: products}); 
+});
+
+app.get('/hashpass', (req, res) => {
+    const password =  hashPassword(req.query.password);
+    console.log({password});
+})
+
+app.get('/testpass', (req, res) => {
+    const samePass = checkPassword(req.query.password, db);
+    console.log({samePass});
+})
+
+// register an account
+app.post('/register', async (req, res) => {
+    console.log(req.body);
+    if(await validateAccountData(req.body, db, res) !== null) {
+        const {
+            firstname,
+            lastname,
+            email,
+            phone,
+            address,
+            username,
+        } = req.body;
+        
+        // const password = await hashPassword(req.body.password);
+        const password = 
+        
+        db.collection('users').insertOne({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            phone: phone,
+            address: address,
+            username: username,
+            password: password,
+        })
+        res.send("Registration was successfull")
+    }
 });
 
 
