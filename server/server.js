@@ -40,13 +40,14 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.set('views', path.join(__dirname, '/src/views'))
 app.set('view engine', 'pug'); // Use the 'Pug' template system
 app.locals.pretty = app.get('env') === 'development'; // The resulting HTML code will be indented in the development environment
 
 /* ************************************************ */
 
 app.use(morgan('dev'));
-app.use(express.static(__dirname + '/public')); 
+app.use(express.static(__dirname + '/src/public')); 
 app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 
 
@@ -265,6 +266,7 @@ app.post('/register', async (req, res) => {
 /* ************************************************ */
 
 app.listen(port, function () {
+    console.log('================================');
     console.log(`The server was started on port ${port}`);
     console.log('To stop the server, press "CTRL + C"');
     console.log('================================');
