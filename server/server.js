@@ -1,9 +1,24 @@
 import express from 'express';
 import morgan from 'morgan';
+import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const port = process.env.PORT || 8001;
+const uri = process.env.MONGODB_URI || 'mongodb+srv://piacho:piacho123@db-mongodb.axn6csn.mongodb.net/webshop?retryWrites=true&w=majority'
+
+// connect to db
+await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => {
+        console.log('Connected to the database');
+    })
+    .catch((err) => {
+        console.error('Error connecting to the database', err);
+        process.exit();
+    });
 
 /* *************************** */
 /* Configuring the application */
@@ -23,7 +38,6 @@ app.use(express.static(__dirname + '/src/public'));
 app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 
 /* ************************************************ */
-
 
 /* ******** */
 /* "Routes" */
@@ -49,117 +63,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Internal Server Error');
 });
-
-
-// app.get('/hashpass', (req, res) => {
-//     const password =  hashPassword(req.query.password);
-//     console.log({password});
-// })
-
-// app.get('/testpass', (req, res) => {
-//     const samePass = checkPassword(req.query.password, db);
-//     console.log({samePass});
-// })
-
-// // register an account
-// app.post('/register', async (req, res) => {
-//     console.log(req.body);
-//     if(await validateAccountData(req.body, db, res) !== null) {
-//         const {
-//             firstname,
-//             lastname,
-//             email,
-//             phone,
-//             address,
-//             username,
-//         } = req.body;
-        
-//         // const password = await hashPassword(req.body.password);
-//         const password = 
-        
-//         db.collection('users').insertOne({
-//             firstname: firstname,
-//             lastname: lastname,
-//             email: email,
-//             phone: phone,
-//             address: address,
-//             username: username,
-//             password: password,
-//         })
-//         res.send("Registration was successfull")
-//     }
-// });
-
-
-// // buy product
-// app.get('/buy', async function (req, res) {
-//     console.log(req.query);
-//     const prodId = req.query._id
-//     const quantity = req.query.quantity;
-//     // db.collection('products').updateOne(
-//     //     { _id: ObjectId(prodId) },
-//     //     { $inc: { units: -quantity } }
-//     // );
-//     // db.collection("products").updateOne({"_id": prodId}, {$inc: {units: -quantity}})
-//     // db.collection("products").findOneAndUpdate( {query: {_id: req.query._id, units: {$gt: quantity} }, update: {$dec: {units: quantity}}})
-//     // const prodName = db.collection("products").find({_id: req.query._id});
-//     res.send("Product has been bought");
-// });
-
-
-// // login
-// app.post('/login', (req, res) => {
-//   const { username, password } = req.body;
-
-//   // Sprawdzanie, czy użytkownik istnieje i czy podane hasło jest poprawne
-//   const user = users.find(user => user.username === username && user.password === password);
-//   if (!user) {
-//     return res.status(401).json({ message: 'Niepoprawne dane logowania' });
-//   }
-
-//   // create session
-//   req.session = {
-//     user: {
-//       username: user.username
-//     }
-//   };
-
-//   res.json({ message: 'Zalogowano pomyślnie'});
-// });
-
-// // auth middleware
-// const authenticateUser = (req, res, next) => {
-//   if (!req.session || !req.session.user) {
-//     return res.status(401).json({ message: 'No auth' });
-//   }
-
-//   // Przekazanie informacji o zalogowanym użytkowniku do kolejnych handlerów
-//   res.locals.user = req.session.user;
-//   next();
-// };
-
-// // customer panel
-// app.get('/client', authenticateUser, (req, res) => {
-//   if (res.locals.user.role !== 'client') {
-//     return res.status(403).json({ message: 'Brak uprawnień' });
-//   }
-
-//   // logic
-
-//   res.json({ message: 'Customer panel' });
-// });
-
-// // admin panel
-// app.get('/admin', authenticateUser, (req, res) => {
-//   if (res.locals.user.role !== 'admin') {
-//     return res.status(403).json({ message: 'Brak uprawnień' });
-//   }
-
-//   // logic
-  
-//   res.json({ message: 'Admin panel' });
-// });
-
 
 /* ************************************************ */
 

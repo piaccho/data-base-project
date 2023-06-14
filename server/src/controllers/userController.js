@@ -1,22 +1,7 @@
-import mongoose from 'mongoose';
 import Category from '#root/src/models/categoryModel.js'
 import Product from '#root/src/models/productModel.js'
 import Cart from '#root/src/models/cartModel.js'
 
-const uri = process.env.MONGODB_URI || 'mongodb+srv://piacho:piacho123@db-mongodb.axn6csn.mongodb.net/webshop?retryWrites=true&w=majority'
-
-// connect to db
-await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => {
-        console.log('Connected to the database');
-    })
-    .catch((err) => {
-        console.error('Error connecting to the database', err);
-        process.exit();
-    });
 
 const userController = {
     getIndex: async (req, res) => {

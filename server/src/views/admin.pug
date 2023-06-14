@@ -1,0 +1,79 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title WebShop server
+    body
+        main
+            h1 WebShop server features testing - Admin Router
+            fieldset 
+                h2 Add product 
+                form(method='POST' action='/add-product')
+                    label(for="email") Email address:
+                    br
+                    input(type="text", name="email", required)
+                    br
+                    label(for="username") User name:
+                    br
+                    input(type="text", name="username", required)
+                    br
+                    label (at least 5 characters)
+                    br
+                    label(for="password") Password:
+                    br
+                    input(type="password", name="password", required)
+                    br
+                    label (at least 8 characters and at least one number)
+                    br
+                    label(for="firstname") First name:
+                    br
+                    input(type="text", name="firstname", required)
+                    br
+                    label(for="lastname") Last name:
+                    br
+                    input(type="text", name="lastname", required)
+                    br
+                    label(for="address") Address:
+                    br
+                    input(type="text", name="address", required)
+                    br
+                    label(for="phone") Phone:
+                    br
+                    input(type="text", name="phone", required)
+                    br
+                    br
+                    input(type='submit', value="Add products")
+                    br
+                    input(type='reset')
+            fieldset 
+                if data.length == 0
+                    h3 Nie znaleziono produktów
+                else
+                    table
+                        thead
+                            tr
+                                th image
+                                th id
+                                th name
+                                th category
+                                th description
+                                th price
+                                th units
+                        tbody
+                            each row in data
+                                tr         
+                                    td
+                                        img(src=row.image, alt="product_img", style="height: 100px")
+                                    td #{row._id}
+                                    td #{row.name}
+                                    td #{row.category}
+                                    td #{row.description}
+                                    td #{row.price} zł
+                                    td #{row.units}
+                                    td
+                                        form(method='GET' action='/admin/product')
+                                            input(type="hidden", name="productid", value=row._id)
+                                            input(type="submit", value="Show product")
+                                            
+

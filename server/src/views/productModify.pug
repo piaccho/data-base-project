@@ -1,0 +1,36 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title WebShop server
+        style(type='text/css').
+            fieldset {
+                display: flex;
+                justify-content: center;
+            }
+            img {
+                margin-right: 20px;
+            }
+    body
+        h1 WebShop server features testing - Admin: Modify product
+        main
+            fieldset 
+                img(src=product.image, alt="product_img", style="height: 300px")
+                div
+                    h2 #{product.category}
+                    h1 #{product.name}
+                    p #{product.description}
+                    h3 Cena: #{product.price}
+                    p Available units: #{product.units}
+                    form(method='POST' action='/admin/modify-product')
+                        label(for="quantity") Quantity:
+                        br
+                        input(type="text", name="quantity", maxlength="4", required)
+                        br
+                        input(type="hidden", name="productid", value=product._id)
+                        input(type="submit", value="Add product to cart")
+                    form(method='POST' action='/admin/delete-product')
+                        input(type="hidden", name="productid", value=product._id)
+                        input(type="submit", value="Delete product")
+            

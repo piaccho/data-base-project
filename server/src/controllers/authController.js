@@ -1,23 +1,7 @@
-import mongoose from 'mongoose';
 import User from '#root/src/models/userModel.js'
 import { validateEmail, validateUsername, validatePassword } from '#root/src/util/utility.js'
 
 import bcrypt from 'bcrypt';
-
-const uri = process.env.MONGODB_URI || 'mongodb+srv://piacho:piacho123@db-mongodb.axn6csn.mongodb.net/webshop?retryWrites=true&w=majority'
-
-// connect to db
-await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => {
-        console.log('Connected to the database');
-    })
-    .catch((err) => {
-        console.error('Error connecting to the database', err);
-        process.exit();
-    });
 
 const authController = {
     getLoginView: async (req, res) => {
@@ -103,8 +87,11 @@ const authController = {
                 return res.status(400).json({ error: 'Cannot find an account with that email address and password' });
             }
 
-
-            res.redirect("/user");
+            if (user.type === "user") {
+                res.redirect("/user");
+            } else if (user.type === "admin") {
+                res.redirect("/admin");
+            }
             // return res.status(200).json({ error: 'User with this email and password exists' });
             // // Wygenerowanie tokena JWT
             // const token = jwt.sign({ userId: user._id }, 'secret-key'); // Zmień 'secret-key' na swoje własne tajne hasło
