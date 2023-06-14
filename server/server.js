@@ -3,12 +3,11 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-const port = process.env.PORT || 8001;
-const uri = process.env.MONGODB_URI || 'mongodb+srv://piacho:piacho123@db-mongodb.axn6csn.mongodb.net/webshop?retryWrites=true&w=majority'
+import cors from 'cors' 
+import { MONGODB_URI, PORT_LISTEN } from '#root/config.js'
 
 // connect to db
-await mongoose.connect(uri, {
+await mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -33,8 +32,10 @@ app.locals.pretty = app.get('env') === 'development'; // The resulting HTML code
 
 /* ************************************************ */
 
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/src/public')); 
+app.use(express.json())
 app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 
 /* ************************************************ */
@@ -46,12 +47,13 @@ app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 import indexRouter from './src/routes/indexRouter.js';
 import authRouter from './src/routes/authRouter.js';
 import userRouter from './src/routes/userRouter.js';
-// import adminRouter from './src/routes/adminRouter.js';
+import adminRouter from './src/routes/adminRouter.js';
+import authController from '#root/src/controllers/authController.js';
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
-// app.use('/admin', adminRouter);
+app.use('/admin', adminRouter);
 
 // Obsługa błędów 404 (Nie znaleziono)
 app.use((req, res, next) => {
@@ -66,9 +68,9 @@ app.use((err, req, res, next) => {
 
 /* ************************************************ */
 
-app.listen(port, function () {
+app.listen(PORT_LISTEN, function () {
     console.log('================================');
-    console.log(`The server was started on port ${port}`);
+    console.log(`The server was started on port ${PORT_LISTEN}`);
     console.log('To stop the server, press "CTRL + C"');
     console.log('================================');
     console.log('Incoming HTTP requests...');

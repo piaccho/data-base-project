@@ -3,7 +3,24 @@ html(lang='en')
     head
         meta(charset='utf-8')
         meta(name='viewport' content='width=device-width, initial-scale=1')
-        title WebShop server
+        title Index - WebShop server
+        style(type='text/css').
+            table {
+                width: 100vw;
+                margin: 0 20px;
+            }
+            main {
+            }
+            #nav {
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                background-color: grey;
+                border: 1px solid black;
+            }
+            #nav input {
+                width: 100px;
+            }
     body
         main
             - var prefix = "";
@@ -11,19 +28,34 @@ html(lang='en')
                 - prefix = "/user";
             if user 
                 h1 WebShop server features testing - User Router
-            else
-                h1 WebShop server features testing - Index Router
-            if user 
-                fieldset 
+                h2 Hello #{user.firstname}!
+                div(id="nav")
+                    form(method='GET' action='/')
+                        input(type='submit', value="Log out")
+                    br
                     form(method='GET' action='/user/profile')
+                        input(type="hidden", name="userid", value=user._id)
                         input(type='submit', value="Adjust profile")
                     form(method='GET' action='/user/orders')
+                        input(type="hidden", name="userid", value=user._id)
                         input(type='submit', value="Show orders")
                     form(method='GET' action='/user/wishlists')
+                        input(type="hidden", name="userid", value=user._id)
                         input(type='submit', value="Show wishlists")
+                    br
+                    form(method='GET' action='/user/cart')
+                        - var cartCounter = "Cart: " + user.cart.total
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value=cartCounter)
+                br
+            else
+                h1 WebShop server features testing - Index Router
             fieldset 
                 h2 Get all products 
                 form(method='GET' action='/products')
+                    if user 
+                        input(type="hidden", name="username", value=user.username)
+                        input(type="hidden", name="password", value=user.password)
                     input(type='submit', value="Get all products")
             fieldset 
                 h2 Get products by category 
@@ -35,6 +67,9 @@ html(lang='en')
                             option(value=c.name) #{c.name}
                     br
                     br
+                    if user 
+                        input(type="hidden", name="username", value=user.username)
+                        input(type="hidden", name="password", value=user.password)
                     input(type='submit', value="Get products")
                     input(type='reset')
             fieldset 
@@ -45,6 +80,9 @@ html(lang='en')
                     input(name='query')
                     br
                     br
+                    if user 
+                        input(type="hidden", name="username", value=user.username)
+                        input(type="hidden", name="password", value=user.password)
                     input(type='submit', value="Get products")
                     input(type='reset')
             if !user

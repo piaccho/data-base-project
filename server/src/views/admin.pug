@@ -8,45 +8,57 @@ html(lang='en')
         main
             h1 WebShop server features testing - Admin Router
             fieldset 
-                h2 Add product 
-                form(method='POST' action='/add-product')
-                    label(for="email") Email address:
+                h2 Add category 
+                form(method='POST' action='/admin/add-category')
+                    label(for="category") Category name:
                     br
-                    input(type="text", name="email", required)
-                    br
-                    label(for="username") User name:
-                    br
-                    input(type="text", name="username", required)
-                    br
-                    label (at least 5 characters)
-                    br
-                    label(for="password") Password:
-                    br
-                    input(type="password", name="password", required)
-                    br
-                    label (at least 8 characters and at least one number)
-                    br
-                    label(for="firstname") First name:
-                    br
-                    input(type="text", name="firstname", required)
-                    br
-                    label(for="lastname") Last name:
-                    br
-                    input(type="text", name="lastname", required)
-                    br
-                    label(for="address") Address:
-                    br
-                    input(type="text", name="address", required)
-                    br
-                    label(for="phone") Phone:
-                    br
-                    input(type="text", name="phone", required)
+                    input(type="text", name="category", required)
                     br
                     br
-                    input(type='submit', value="Add products")
+                    input(type="submit", value="Add category")
+                h2 Delete category 
+                form(method='POST' action='/admin/delete-category')
+                    label(for="categoryid") Category name:
                     br
-                    input(type='reset')
+                    select(name="categoryid", required)
+                        each c in categories
+                            option(value=c._id) #{c.name}
+                    br
+                    br
+                    input(type="submit", value="Delete category")
             fieldset 
+                h2 Add product 
+                form(method='POST' action='/admin/add-product')
+                    label(for="name") Name:
+                    br
+                    input(style="width: 350px", type="text", name="name", required)
+                    br
+                    label(for="category") Category:
+                    br
+                    select(name="category", required)
+                        each c in categories
+                            option(value=c.name) #{c.name}
+                    br
+                    label(for="description") Description:
+                    br
+                    textarea(id="description", name="description", rows="4", cols="50", required)
+                    br
+                    label(for="price") Price:
+                    br
+                    input(type="text", name="price", required)
+                    br
+                    label(for="units") Available units:
+                    br
+                    input(type="text", name="units", maxlength="4", required)
+                    br
+                    label(for="image") Image URL:
+                    br
+                    input(style="width: 350px", type="text", name="image", required)
+                    br
+                    br
+                    input(type="submit", value="Add product")
+            fieldset 
+                h2 Modify/delete product 
                 if data.length == 0
                     h3 Nie znaleziono produktów
                 else
@@ -75,5 +87,7 @@ html(lang='en')
                                         form(method='GET' action='/admin/product')
                                             input(type="hidden", name="productid", value=row._id)
                                             input(type="submit", value="Show product")
-                                            
+                                        form(method='POST' action='/admin/delete-product')
+                                            input(type="hidden", name="productid", value=row._id)
+                                            input(type="submit", value="Delete product")
 

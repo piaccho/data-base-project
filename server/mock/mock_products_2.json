@@ -1,0 +1,434 @@
+[
+  {
+    "name": "Smartfon iPhone 14 Pro",
+    "category": "Elektronika",
+    "description": "Smartfon iPhone 14 Pro to najnowszy model telefonu marki Apple. Wyposażony w zaawansowany procesor, duży ekran o wysokiej rozdzielczości oraz innowacyjny system operacyjny. Posiada doskonałą jakość wykonania i wiele funkcji, które umożliwiają korzystanie z najnowszych technologii.",
+    "price": 3700,
+    "units": 40,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Smartfon%20iPhone%20X"
+  },
+  {
+    "name": "Smartfon Samsung Galaxy S20",
+    "category": "Elektronika",
+    "description": "Smartfon Samsung Galaxy S20 to flagowy model telefonu marki Samsung. Wyposażony w potężny procesor, ekran o wysokiej rozdzielczości i doskonałe aparaty fotograficzne. Posiada również wiele funkcji, takich jak rozpoznawanie twarzy, czytnik linii papilarnych i wodoodporność.",
+    "price": 4400,
+    "units": 110,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Smartfon%20Samsung%20Galaxy%20S20"
+  },
+  {
+    "name": "Telewizor Sony 4K Ultra HD",
+    "category": "Elektronika",
+    "description": "Telewizor Sony 4K Ultra HD to wysokiej jakości telewizor z rozdzielczością 4K. Posiada zaawansowane funkcje, takie jak technologia HDR, płynne odświeżanie obrazu i dostęp do różnorodnych treści. Zapewnia wspaniałe wrażenia wizualne i doskonały dźwięk.",
+    "price": 4300,
+    "units": 40,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Telewizor%20Sony%204K%20Ultra%20HD"
+  },
+  {
+    "name": "Telewizor LG OLED",
+    "category": "Elektronika",
+    "description": "Telewizor LG OLED to innowacyjny telewizor wyposażony w technologię Organic LED, która zapewnia głębokie czernie, nasycone kolory i szerokie kąty widzenia. Posiada zaawansowane funkcje smart TV oraz doskonały dźwięk, co pozwala na pełne zanurzenie się w treściach rozrywkowych.",
+    "price": 7000,
+    "units": 30,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Telewizor%20LG%20OLED"
+  },
+  {
+    "name": "Laptop MacBook Pro",
+    "category": "Elektronika",
+    "description": "Laptop MacBook Pro to wydajny komputer przenośny marki Apple. Posiada mocne podzespoły, wysokiej jakości ekran Retina oraz elegancki design. Laptop ten oferuje doskonałą wydajność, długą żywotność baterii i zaawansowane funkcje dla profesjonalistów i entuzjastów technologii.",
+    "price": 3800,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Laptop%20MacBook%20Pro"
+  },
+  {
+    "name": "Laptop Dell XPS",
+    "category": "Elektronika",
+    "description": "Laptop Dell XPS to wyjątkowo lekki i wydajny komputer przenośny. Wyposażony w potężny procesor, duży ekran o wysokiej rozdzielczości i solidną konstrukcję. Zapewnia doskonałą wydajność i niezawodność, idealny dla osób poszukujących mobilnego narzędzia do pracy i rozrywki.",
+    "price": 4200,
+    "units": 50,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Laptop%20Dell%20XPS"
+  },
+  {
+    "name": "Smartfon Xiaomi Mi 11",
+    "category": "Elektronika",
+    "description": "Smartfon Xiaomi Mi 11 to zaawansowany telefon z doskonałymi parametrami. Wyposażony w potężny procesor, duży ekran AMOLED i wysokiej jakości aparat fotograficzny. Zapewnia doskonałą wydajność i świetne wrażenia użytkowania.",
+    "price": 2000,
+    "units": 50,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Smartfon+Xiaomi+Mi+11"
+  },
+  {
+    "name": "Słuchawki bezprzewodowe Sony WH-1000XM4",
+    "category": "Elektronika",
+    "description": "Słuchawki bezprzewodowe Sony WH-1000XM4 to wysokiej klasy słuchawki douszne. Posiadają zaawansowaną technologię redukcji hałasu, doskonały dźwięk i długą żywotność baterii. Idealne do słuchania muzyki w wysokiej jakości.",
+    "price": 1200,
+    "units": 30,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=S%C5%82uchawki+bezprzewodowe+Sony+WH-1000XM4"
+  },
+  {
+    "name": "Laptop HP Spectre x360",
+    "category": "Elektronika",
+    "description": "Laptop HP Spectre x360 to elegancki i wydajny laptop z ekranem dotykowym. Wyposażony w mocny procesor, duży dysk SSD i wysokiej jakości klawiaturę podświetlaną. Idealny do pracy i rozrywki.",
+    "price": 4500,
+    "units": 20,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Laptop+HP+Spectre+x360"
+  },
+  {
+    "name": "Sukienka Gucci",
+    "category": "Moda",
+    "description": "Sukienka Gucci to luksusowa sukienka z najwyższej jakości materiałów. Oryginalny design, doskonałe krojenie i staranne wykończenie sprawiają, że jest to produkt o wyjątkowym charakterze. Doskonale nadaje się na wieczorne wyjścia i specjalne okazje.",
+    "price": 1100,
+    "units": 170,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Sukienka+Gucci"
+  },
+  {
+    "name": "Bluza Tommy Hilfiger",
+    "category": "Moda",
+    "description": "Bluza Tommy Hilfiger to stylowa i wygodna bluza renomowanej marki. Wykonana z wysokiej jakości materiałów, zapewniających komfort noszenia. Posiada charakterystyczny logo marki, co nadaje jej unikalny wygląd. Idealna na chłodne dni i casualowe stylizacje.",
+    "price": 500,
+    "units": 120,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Bluza+Tommy+Hilfiger"
+  },
+  {
+    "name": "T-Shirt Champion",
+    "category": "Moda",
+    "description": "T-Shirt Champion to klasyczny t-shirt renomowanej marki. Wykonany z wysokiej jakości bawełny, gwarantuje wygodę i trwałość. Posiada prosty design i dostępny jest w różnorodnych kolorach. Doskonały do codziennych, casualowych stylizacji.",
+    "price": 100,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=T-Shirt+Champion"
+  },
+  {
+    "name": "Koszula męska Ralph Lauren ",
+    "category": "Moda",
+    "description": "Koszula męska Ralph Lauren to elegancka koszula doskonałej jakości. Wykonana z miękkiej i wytrzymałej tkaniny, zapewniającej komfort noszenia. Posiada klasyczny krój i charakterystyczny logo marki. Idealna na formalne okazje i biznesowe spotkania.",
+    "price": 600,
+    "units": 10,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Koszula+m%C4%99ska+Ralph+Lauren+"
+  },
+  {
+    "name": "Spodnie jeans Levi",
+    "category": "Moda",
+    "description": "Spodnie jeans Levi to klasyczne jeansy znanej marki. Wykonane z wytrzymałego denimu, gwarantującego trwałość i wygodę noszenia. Posiadają różnorodne fasony i kroje, dzięki czemu można dobrać idealny model do swojego stylu.",
+    "price": 400,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Spodnie+jeans+Levi"
+  },
+  {
+    "name": "Buty sportowe Adidas Ultraboost",
+    "category": "Moda",
+    "description": "Buty sportowe Adidas Ultraboost to wyjątkowo wygodne buty do biegania. Wyposażone w innowacyjną technologię Boost, zapewniającą doskonałe amortyzowanie i energiczny bieg. Posiadają również atrakcyjny design i solidną konstrukcję.",
+    "price": 500,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Buty+sportowe+Adidas+Ultraboost"
+  },
+  {
+    "name": "Sukienka Zara",
+    "category": "Moda",
+    "description": "Sukienka Zara to elegancka i stylowa sukienka na każdą okazję. Wykonana z wysokiej jakości materiałów, doskonale podkreśla sylwetkę i zapewnia wygodę noszenia. Idealna do wieczorowych wyjść i specjalnych okazji.",
+    "price": 250,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Sukienka+Zara"
+  },
+  {
+    "name": "Garnitur Hugo Boss",
+    "category": "Moda",
+    "description": "Garnitur Hugo Boss to luksusowy garnitur męski, wykonany z najwyższej jakości materiałów. Doskonale skrojony i dopasowany, gwarantuje elegancki wygląd i poczucie pewności siebie. Idealny na ważne okazje i formalne spotkania.",
+    "price": 3000,
+    "units": 10,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Garnitur+Hugo+Boss"
+  },
+  {
+    "name": "Buty sneakers Nike Air Max",
+    "category": "Moda",
+    "description": "Buty sneakers Nike Air Max to klasyczne buty sportowe, które łączą styl i wygodę. Wyposażone w nowoczesne technologie, zapewniają doskonałą amortyzację i wsparcie dla stóp. Idealne do codziennego noszenia i aktywności fizycznej.",
+    "price": 500,
+    "units": 40,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Buty+sneakers+Nike+Air+Max"
+  },
+  {
+    "name": "Kanapa BlackRedWhite",
+    "category": "Dom i ogród",
+    "description": "Kanapa BlackRedWhite to nowoczesna kanapa o eleganckim wyglądzie. Wykonana z wysokiej jakości materiałów, gwarantujących wygodę i trwałość. Posiada ergonomiczny kształt i regulowane oparcie, umożliwiające dostosowanie do indywidualnych preferencji.",
+    "price": 1900,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Kanapa+BlackRedWhite"
+  },
+  {
+    "name": "Stół kuchenny Meblar",
+    "category": "Dom i ogród",
+    "description": "Stół kuchenny Meblar to solidny stół o nowoczesnym designie. Wykonany z wytrzymałych materiałów, gwarantujących trwałość i łatwość utrzymania w czystości. Posiada odpowiednią powierzchnię roboczą i wiele praktycznych rozwiązań, idealnych do kuchni.",
+    "price": 1000,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=St%C3%B3%C5%82+kuchenny+Meblar"
+  },
+  {
+    "name": "Lodówka BOSCH ",
+    "category": "Dom i ogród",
+    "description": "Lodówka BOSCH to wysokiej jakości lodówka marki Bosch. Wyposażona w wiele funkcji, takich jak automatyczne rozmrażanie, regulacja temperatury i efektywne oświetlenie LED. Oferuje dużą pojemność i energooszczędność, idealna do przechowywania żywności.",
+    "price": 1700,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Lod%C3%B3wka+BOSCH+"
+  },
+  {
+    "name": "Pralka Miele",
+    "category": "Dom i ogród",
+    "description": "Pralka Miele to zaawansowana pralka marki Miele. Wyposażona w innowacyjne funkcje, takie jak technologia prania SteamCare, automatyczne dos dosowania detergentu i dużą pojemność. Zapewnia skuteczne pranie i oszczędność energii.",
+    "price": 1500,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Pralka+Miele"
+  },
+  {
+    "name": "Kosiarka STILL ",
+    "category": "Dom i ogród",
+    "description": "Kosiarka STILL to solidna kosiarka do trawy. Wyposażona w mocny silnik i ostre ostrza, umożliwia skuteczne koszenie większych powierzchni trawników. Posiada ergonomiczny uchwyt i regulację wysokości koszenia.",
+    "price": 1500,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Kosiarka+STILL+"
+  },
+  {
+    "name": "Podkaszarka STILL",
+    "category": "Dom i ogród",
+    "description": "Podkaszarka STILL to praktyczne narzędzie ogrodowe do koszenia trawy na trudno dostępnych obszarach. Wyposażona w silnik o wysokiej mocy i regulowany uchwyt, umożliwia precyzyjne przycinanie trawy wokół drzew, krzewów i innych przeszkód.",
+    "price": 1000,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Podkaszarka+STILL"
+  },
+  {
+    "name": "Robot odkurzacz iRobot Roomba",
+    "category": "Dom i ogród",
+    "description": "Robot odkurzacz iRobot Roomba to inteligentne urządzenie, które samodzielnie odkurza podłogi. Wyposażony w zaawansowane czujniki i system nawigacji, skutecznie usuwa kurz i brud z różnych powierzchni. Doskonały do utrzymania czystości w domu.",
+    "price": 1500,
+    "units": 15,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Robot+odkurzacz+iRobot+Roomba"
+  },
+  {
+    "name": "Komplet garnków Berghoff",
+    "category": "Dom i ogród",
+    "description": "Komplet garnków Berghoff to profesjonalne naczynia kuchenne wykonane z wysokiej jakości stali nierdzewnej. Posiadają solidne pokrywki i ergonomiczne uchwyty, umożliwiające wygodne gotowanie. Idealne do przygotowywania różnorodnych dań.",
+    "price": 800,
+    "units": 25,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Komplet+garnk%C3%B3w+Berghoff"
+  },
+  {
+    "name": "Grill gazowy Weber",
+    "category": "Dom i ogród",
+    "description": "Grill gazowy Weber to wysokiej jakości grill, który umożliwia przygotowanie pysznych potraw na świeżym powietrzu. Wyposażony w płomień gazowy i wiele funkcji, zapewnia doskonałe rezultaty pieczenia. Idealny do grillowania w ogrodzie lub na tarasie.",
+    "price": 2500,
+    "units": 8,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Grill+gazowy+Weber"
+  },
+  {
+    "name": "Harry Potter i Komnata Tajemnic",
+    "category": "Książki",
+    "description": "Harry Potter i Komnata Tajemnic to druga część bestsellerowej serii powieści J.K. Rowling. Opowiada o dalszych przygodach młodego czarodzieja Harry'ego Pottera i jego przyjaciół w Hogwarcie. Pełna magii, tajemnic i emocji, książka ta wciąga czytelników w fascynujący świat czarodziejów.",
+    "price": 100,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Harry+Potter+i+Komnata+Tajemnic"
+  },
+  {
+    "name": "Pułapki myślenia",
+    "category": "Książki",
+    "description": "Pułapki myślenia to książka autorstwa Daniela Kahnemana, laureata Nagrody Nobla w dziedzinie ekonomii. Autor analizuje irracjonalne wzorce myślowe, które wpływają na nasze decyzje i oceny. Książka ta jest niezwykle pouczająca i prowokuje do refleksji nad sposobem, w jaki myślimy.",
+    "price": 50,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Pu%C5%82apki+my%C5%9Blenia"
+  },
+  {
+    "name": "50 przepisów siostry Faustyny",
+    "category": "Książki",
+    "description": "50 przepisów siostry Faustyny to książka kucharska zawierająca wyjątkowe przepisy na potrawy inspirowane kuchnią polską i międzynarodową. Autorstwa siostry Faustyny, która słynie z umiejętności przyrządzania pysznych dań. Książka ta stanowi doskonałą inspirację dla wszystkich miłośników gotowania.",
+    "price": 90,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=50+przepis%C3%B3w+siostry+Faustyny"
+  },
+  {
+    "name": "Baśnie braci Grimm",
+    "category": "Książki",
+    "description": "Baśnie braci Grimm to zbiór klasycznych baśni napisanych przez braci Jacoba i Wilhelma Grimm. Opowieści te są pełne magii, przygód i morałów, które przekazywane są przez pokolenia. Ta książka to niezwykła podróż do świata wyobraźni i marzeń.",
+    "price": 70,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Ba%C5%9Bnie+braci+Grimm"
+  },
+  {
+    "name": "Python: od podstaw",
+    "category": "Książki",
+    "description": "Python: od podstaw to praktyczny podręcznik dla osób rozpoczynających naukę programowania w języku Python. Książka ta wprowadza czytelnika w podstawowe pojęcia i techniki programowania, prezentując liczne przykłady i ćwiczenia. Doskonała dla początkujących programistów.",
+    "price": 100,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Python%3A+od+podstaw"
+  },
+  {
+    "name": "Java: Techniki zaawansowane",
+    "category": "Książki",
+    "description": "Java: Techniki zaawansowane to książka skierowana do programistów posiadających już podstawową wiedzę na temat języka Java. Oferuje pogłębione omówienie zaawansowanych technik i narzędzi programistycznych, umożliwiających tworzenie bardziej rozbudowanych i efektywnych aplikacji.",
+    "price": 90,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Java%3A+Techniki+zaawansowane"
+  },
+  {
+    "name": "Sekretne życie drzew",
+    "category": "Książki",
+    "description": "Sekretne życie drzew to bestsellerowa książka, która odkrywa fascynujący świat roślin. Autor przedstawia niezwykłe historie i badania, które ukazują, jak drzewa komunikują się i współdziałają w lesie. Doskonała lektura dla miłośników przyrody.",
+    "price": 40,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Sekretne+%C5%BCycie+drzew"
+  },
+  {
+    "name": "Milk and Honey",
+    "category": "Książki",
+    "description": "Milk and Honey to zbiór poezji i prozy, który porusza tematy miłości, bólu, wyleczenia i odrodzenia. Autorka w sposób subtelny i piękny oddaje emocje i doświadczenia. Doskonała lektura dla osób ceniących literaturę piękną.",
+    "price": 25,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Milk+and+Honey"
+  },
+  {
+    "name": "Hobbit",
+    "category": "Książki",
+    "description": "Hobbit to klasyczna powieść fantasy, napisana przez J.R.R. Tolkiena. Opowiada o przygodach Bilba Bagginsa, który wyrusza w niebezpieczną podróż z grupą krasnoludów. Pełna magii i emocji historia, która wciąga czytelnika od pierwszej strony.",
+    "price": 30,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Hobbit"
+  },
+  {
+    "name": "Piłka nożna Adidas",
+    "category": "Sport i rekreacja",
+    "description": "Piłka nożna Adidas to profesjonalna piłka do gry w piłkę nożną. Wykonana z wysokiej jakości materiałów, zapewniających trwałość i doskonałe właściwości piłki. Posiada atrakcyjny design i spełnia standardy wyznaczone przez federację piłkarską.",
+    "price": 200,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Pi%C5%82ka+no%C5%BCna+Adidas"
+  },
+  {
+    "name": "Narty Atomic",
+    "category": "Sport i rekreacja",
+    "description": "Narty Atomic to wysokiej jakości narty, idealne dla miłośników sportów zimowych. Wykonane z wytrzymałych materiałów, zapewniających doskonałą kontrolę i stabilność na stoku. Doskonały wybór dla osób o różnym stopniu zaawansowania.",
+    "price": 300,
+    "units": 50,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Narty+Atomic"
+  },
+  {
+    "name": "Hantle 50kg Decathlon",
+    "category": "Sport i rekreacja",
+    "description": "Hantle 50kg Decathlon to zestaw hantli o różnych ciężarach, umożliwiający trening siłowy w domu lub na siłowni. Wykonane z wytrzymałych materiałów, zapewniających trwałość i pewny chwyt. Doskonałe dla osób uprawiających kulturystykę i fitness.",
+    "price": 300,
+    "units": 60,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Hantle+50kg+Decathlon"
+  },
+  {
+    "name": "Rakieta tenisowa Wilson",
+    "category": "Sport i rekreacja",
+    "description": "Rakieta tenisowa Wilson to profesjonalna rakieta do gry w tenisa. Wykonana z wysokiej jakości materiałów, zapewniających wytrzymałość i precyzję uderzeń. Doskonała dla zawodników na różnych poziomach zaawansowania.",
+    "price": 100,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Rakieta+tenisowa+Wilson"
+  },
+  {
+    "name": "Okulary do pływania Martes",
+    "category": "Sport i rekreacja",
+    "description": "Okulary do pływania Martes to wysokiej jakości okulary pływackie. Wyposażone w szczelne uszczelnienia i antyfogowe soczewki, zapewniające klarowne widzenie pod wodą. Doskonale dopasowują się do twarzy i chronią oczy przed podrażnieniem.",
+    "price": 200,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Okulary+do+p%C5%82ywania+Martes"
+  },
+  {
+    "name": "Deskorolka Skatepro",
+    "category": "Sport i rekreacja",
+    "description": "Deskorolka Skatepro to profesjonalna deskorolka dla entuzjastów sportów ekstremalnych. Wyposażona w wytrzymałą deskę i solidne podwozie, umożliwiające płynną jazdę i wykonywanie różnorodnych trików. Doskonała dla początkujących i zaawansowanych deskorolkarzy.",
+    "price": 100,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Deskorolka+Skatepro"
+  },
+  {
+    "name": "Rowerek treningowy Kettler",
+    "category": "Sport i rekreacja",
+    "description": "Rowerek treningowy Kettler to profesjonalny sprzęt do treningu kardio. Wyposażony w wygodne siedzenie, regulowany opór i różne programy treningowe. Idealny do utrzymania kondycji i spalania kalorii w domu.",
+    "price": 1500,
+    "units": 10,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Rowerek+treningowy+Kettler"
+  },
+  {
+    "name": "Piłka do koszykówki Spalding",
+    "category": "Sport i rekreacja",
+    "description": "Piłka do koszykówki Spalding to profesjonalna piłka, wykonana z wysokiej jakości skóry syntetycznej. Posiada doskonały chwyt i wytrzymałą konstrukcję, zapewniającą precyzyjne rzuty i dobrą kontrolę nad piłką. Doskonała do treningu i gry w koszykówkę.",
+    "price": 100,
+    "units": 30,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Pi%C5%82ka+do+koszyk%C3%B3wki+Spalding"
+  },
+  {
+    "name": "Hantle Reebok",
+    "category": "Sport i rekreacja",
+    "description": "Hantle Reebok to profesjonalne hantle o różnej wadze, wykonane z wysokiej jakości materiałów. Doskonałe do treningu siłowego i formowania sylwetki. Zapewniają wygodny chwyt i stabilność podczas ćwiczeń.",
+    "price": 80,
+    "units": 50,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Hantle+Reebok"
+  },
+  {
+    "name": "Witamina C Vita",
+    "category": "Zdrowie i uroda",
+    "description": "Witamina C Vita to suplement diety zawierający naturalną witaminę C. Zapewnia wsparcie dla odporności organizmu i poprawia ogólną kondycję. Produkt jest łatwo przyswajalny i dostępny w formie tabletek lub proszku do rozpuszczania.",
+    "price": 50,
+    "units": 50,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Witamina+C+Vita"
+  },
+  {
+    "name": "Magnez B6 Cardio Magnefar",
+    "category": "Zdrowie i uroda",
+    "description": "Magnez B6 Cardio Magnefar to suplement diety zawierający magnez i witaminę B6. Odpowiednie spożycie magnezu wspomaga pracę mięśni, a witamina B6 wpływa na funkcjonowanie układu nerwowego. Produkt dostępny w formie tabletek lub proszku do rozpuszczania.",
+    "price": 80,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Magnez+B6+Cardio+Magnefar"
+  },
+  {
+    "name": "Krem do twarzy z filtrem Garnier ",
+    "category": "Zdrowie i uroda",
+    "description": "Krem do twarzy z filtrem Garnier to krem pielęgnacyjny, który jednocześnie chroni skórę przed szkodliwym promieniowaniem UV. Zawiera składniki nawilżające i odżywcze, które poprawiają kondycję skóry i chronią ją przed negatywnymi czynnikami zewnętrznymi.",
+    "price": 60,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Krem+do+twarzy+z+filtrem+Garnier+"
+  },
+  {
+    "name": "Maseczka do twarzy Dove",
+    "category": "Zdrowie i uroda",
+    "description": "Maseczka do twarzy Dove to produkt pielęgnacyjny, który nawilża i odżywia skórę twarzy. Zawiera naturalne składniki, które pomagają zredukować niedoskonałości skóry i przywrócić jej zdrowy wygląd. Doskonała do stosowania raz w tygodniu.",
+    "price": 90,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Maseczka+do+twarzy+Dove"
+  },
+  {
+    "name": "Ciśnieniomierz Omron",
+    "category": "Zdrowie i uroda",
+    "description": "Ciśnieniomierz Omron to profesjonalne urządzenie do pomiaru ciśnienia krwi. Precyzyjnie mierzy ciśnienie skurczowe i rozkurczowe oraz puls, umożliwiając kontrolę stanu zdrowia. Posiada wygodny mankiet i czytelny wyświetlacz.",
+    "price": 100,
+    "units": 70,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Ci%C5%9Bnieniomierz+Omron"
+  },
+  {
+    "name": "Termometr Microlife",
+    "category": "Zdrowie i uroda",
+    "description": "Termometr Microlife to precyzyjny termometr elektroniczny do pomiaru temperatury ciała. Wyposażony w funkcję pomiaru w ustach, pod pachą lub w odbycie, zapewnia dokładne wyniki w krótkim czasie. Doskonały do domowego użytku.",
+    "price": 50,
+    "units": 80,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Termometr+Microlife"
+  },
+  {
+    "name": "Krem BB Maybelline",
+    "category": "Zdrowie i uroda",
+    "description": "Krem BB Maybelline to wielofunkcyjny kosmetyk, który łączy w sobie właściwości kremu nawilżającego i podkładu. Zapewnia naturalne krycie, wygładza skórę i chroni przed promieniowaniem UV. Doskonały do codziennego makijażu.",
+    "price": 35,
+    "units": 90,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Krem+BB+Maybelline"
+  },
+  {
+    "name": "Suplement diety Omega-3",
+    "category": "Zdrowie i uroda",
+    "description": "Suplement diety Omega-3 to naturalne źródło kwasów tłuszczowych Omega-3, które wspierają zdrowie serca i mózgu. Zapewniają optymalne funkcjonowanie organizmu i redukują stan zapalny. Doskonały dla osób dbających o zdrowie i dobre samopoczucie.",
+    "price": 50,
+    "units": 100,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Suplement+diety+Omega-3"
+  },
+  {
+    "name": "Perfumy Chanel Coco Mademoiselle",
+    "category": "Zdrowie i uroda",
+    "description": "Perfumy Chanel Coco Mademoiselle to luksusowy zapach, który emanuje elegancją i kobiecością. Zapach kwiatowo-cytrusowy, który pozostawia trwały ślad. Doskonały dla kobiet ceniących luksus i wyjątkowe perfumy.",
+    "price": 300,
+    "units": 20,
+    "image": "https://fakeimg.pl/350x300/?font_size=30&text=Perfumy+Chanel+Coco+Mademoiselle"
+  }
+]

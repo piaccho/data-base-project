@@ -1,0 +1,46 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title Cart - WebShop server
+        style(type='text/css').
+            table {
+                width: 100vw;
+                margin: 0 20px;
+            }
+    body
+        h1 WebShop server - Cart route
+        main
+            if user.cart.total == 0
+                h3 Cart is empty
+            else
+                h3 Cart: #{user.cart.total} product/s
+                table
+                    thead
+                        tr
+                            th 
+                            th name
+                            th category
+                            th price
+                            th quantity
+                            th total price
+                    tbody
+                        each row in user.cart.items
+                            tr         
+                                td
+                                    img(src=row.product.image, alt="product_img", style="height: 150px")
+                                td #{row.product.name}
+                                td #{row.product.category}
+                                td #{row.product.price} zł
+                                td #{row.quantity}
+                                td #{row.quantity*row.product.price} zł
+                                td
+                                    form(method='GET' action='/product')
+                                        if user 
+                                            input(type="hidden", name="username", value=user.username)
+                                            input(type="hidden", name="password", value=user.password)
+                                        input(type="hidden", name="productid", value=row.product._id)
+                                        input(type="submit", value="Show product")
+
+                                

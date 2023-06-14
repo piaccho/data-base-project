@@ -3,24 +3,22 @@ html(lang='en')
     head
         meta(charset='utf-8')
         meta(name='viewport' content='width=device-width, initial-scale=1')
-        title WebShop server
+        if flag=="sign-in"
+            title Login - WebShop server
+        else
+            title Register - WebShop server
         style(type='text/css').
             main {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
             }
-            fieldset {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
+            
             .alert {
                 color:green;
             }
     body
-        h1 WebShop server features testing - Sign Router
+        h1 WebShop server - Sign Router
         main
             if flag=="sign-in"
                 if created
@@ -40,9 +38,12 @@ html(lang='en')
                         input(type="submit", value="Sign in")
                         br
                         input(type='reset')
-                fieldset 
+                        br
+                        br
                     form(method='GET' action='/auth/sign-up')
                         input(type='submit', value="Sign up")
+                    
+                        
             else 
                 fieldset 
                     h2 Register an account 

@@ -26,6 +26,14 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Review',
+            default: [],
+            required: true,
+        }
+    ]
 });
 
 const Product = mongoose.model('Product', productSchema);

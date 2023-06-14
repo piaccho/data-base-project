@@ -13,23 +13,43 @@ html(lang='en')
                 margin-right: 20px;
             }
     body
-        h1 WebShop server features testing - Admin: Modify product
+        h1 WebShop server features testing - Admin: Modify/Delete product
         main
             fieldset 
                 img(src=product.image, alt="product_img", style="height: 300px")
                 div
-                    h2 #{product.category}
-                    h1 #{product.name}
-                    p #{product.description}
-                    h3 Cena: #{product.price}
-                    p Available units: #{product.units}
                     form(method='POST' action='/admin/modify-product')
-                        label(for="quantity") Quantity:
+                        label(for="name") Name:
                         br
-                        input(type="text", name="quantity", maxlength="4", required)
+                        input(style="width: 350px", type="text", value=product.name name="name", required)
+                        br
+                        label(for="category") Kategoria:
+                        br
+                        select(name="category", required)
+                            each c in categories
+                                if c.name === product.category
+                                    option(value=c.name, selected="selected") #{c.name}
+                                else
+                                    option(value=c.name) #{c.name}
+                        br
+                        label(for="description") Description:
+                        br
+                        textarea(id="description", name="description", rows="4", cols="50", required) #{product.description}
+                        br
+                        label(for="price") Price:
+                        br
+                        input(type="text", value=product.price name="price", required)
+                        br
+                        label(for="units") Available units:
+                        br
+                        input(type="text", value=product.units name="units", maxlength="4", required)
+                        br
+                        label(for="image") Image URL:
+                        br
+                        input(style="width: 350px", type="text", value=product.image name="image", required)
                         br
                         input(type="hidden", name="productid", value=product._id)
-                        input(type="submit", value="Add product to cart")
+                        input(type="submit", value="Modify product")
                     form(method='POST' action='/admin/delete-product')
                         input(type="hidden", name="productid", value=product._id)
                         input(type="submit", value="Delete product")

@@ -3,43 +3,67 @@ html(lang='en')
     head
         meta(charset='utf-8')
         meta(name='viewport' content='width=device-width, initial-scale=1')
-        title WebShop server
+        title Products - WebShop server
+        style(type='text/css').
+            table {
+                width: 100vw;
+                margin: 0 20px;
+            }
+            #nav {
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                background-color: grey;
+                border: 1px solid black;
+            }
+            #nav input {
+                width: 100px;
+            }
     body
+        h1 WebShop server - Products route
         main
-            h2 Products
+            if user
+                div(id="nav")
+                    form(method='GET' action='/')
+                        input(type='submit', value="Log out")
+                    br
+                    form(method='GET' action='/user/profile')
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value="Adjust profile")
+                    form(method='GET' action='/user/orders')
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value="Show orders")
+                    form(method='GET' action='/user/wishlists')
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value="Show wishlists")
+                    br
+                    form(method='GET' action='/user/cart')
+                        - var cartCounter = "Cart: " + user.cart.total
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value=cartCounter)
             if data.length == 0
                 h3 Nie znaleziono produktów
             else
                 table
                     thead
                         tr
-                            th image
-                            th id
+                            th 
                             th name
                             th category
-                            th description
                             th price
-                            th units
                     tbody
                         each row in data
                             tr         
                                 td
-                                    img(src=row.image, alt="product_img", style="height: 100px")
-                                td #{row._id}
+                                    img(src=row.image, alt="product_img", style="height: 150px")
                                 td #{row.name}
                                 td #{row.category}
-                                td #{row.description}
                                 td #{row.price} zł
-                                td #{row.units}
                                 td
-                                    form(method='POST' action='/add-product-to-cart')
-                                        label(for="quantity") Quantity:
-                                        br
-                                        input(type="text", name="quantity", maxlength="4", required)
-                                        br
-                                        input(type="hidden", name="productid", value=row._id)
-                                        input(type="submit", value="Add product to cart")
                                     form(method='GET' action='/product')
+                                        if user 
+                                            input(type="hidden", name="username", value=user.username)
+                                            input(type="hidden", name="password", value=user.password)
                                         input(type="hidden", name="productid", value=row._id)
                                         input(type="submit", value="Show product")
 

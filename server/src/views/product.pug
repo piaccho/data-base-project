@@ -12,22 +12,57 @@ html(lang='en')
             img {
                 margin-right: 20px;
             }
+            #nav {
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                background-color: grey;
+                border: 1px solid black;
+            }
+            #nav input {
+                width: 100px;
+            }
     body
         h1 WebShop server features testing - Product route
         main
+            if user
+                div(id="nav")
+                    form(method='GET' action='/')
+                        input(type='submit', value="Log out")
+                    br
+                    form(method='GET' action='/user/profile')
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value="Adjust profile")
+                    form(method='GET' action='/user/orders')
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value="Show orders")
+                    form(method='GET' action='/user/wishlists')
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value="Show wishlists")
+                    br
+                    form(method='GET' action='/user/cart')
+                        - var cartCounter = "Cart: " + user.cart.total
+                        input(type="hidden", name="userid", value=user._id)
+                        input(type='submit', value=cartCounter)
             fieldset 
                 img(src=product.image, alt="product_img", style="height: 300px")
                 div
                     h2 #{product.category}
                     h1 #{product.name}
                     p #{product.description}
-                    h3 Cena: #{product.price}
+                    h3 Price: #{product.price} zł
                     p Available units: #{product.units}
                     form(method='POST' action='/add-product-to-cart')
                         label(for="quantity") Quantity:
                         br
                         input(type="text", name="quantity", maxlength="4", required)
                         br
+                        if user 
+                            input(type="hidden", name="userid", value=user._id)
                         input(type="hidden", name="productid", value=product._id)
                         input(type="submit", value="Add product to cart")
-            
+                    form(method='POST' action='/add-product-to-wishlist')
+                        if user 
+                            input(type="hidden", name="userid", value=user._id)
+                        input(type="hidden", name="productid", value=product._id)
+                        input(type="submit", value="Add product to wishlist")

@@ -13,18 +13,7 @@
 use('webshop');
 
 // Insert a few documents into the sales collection.
-db.categories.insert([
-  { '_id': 1, 'name': 'Elektronika'},
-  { '_id': 2, 'name': 'Moda'},
-  { '_id': 3, 'name': 'Dom i ogród'},
-  { '_id': 4, 'name': 'Książki'},
-  { '_id': 5, 'name': 'Sport i rekreacja'},
-  { '_id': 6, 'name': 'Zdrowie i uroda'},
-  { '_id': 7, 'name': 'Dzieci i niemowlęta'},
-  { '_id': 8, 'name': 'Motoryzacja'},
-]);
-
-console.log("Dodano obiekty");
+db.users.updateMany({}, { $set: { preferedpayment: 'on-delivery' } })
 
 // // Run a find command to view items sold on April 4th, 2014.
 // const salesOnApril4th = db.getCollection('sales').find({

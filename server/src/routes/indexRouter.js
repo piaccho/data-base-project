@@ -21,7 +21,17 @@ router.get('/search', indexController.searchProductsByKeywords);
 // show product
 router.get('/product', indexController.showProduct);
 
-// // add product to cart
-// router.post('/add-product-to-cart', indexController.addProductToCart);
+// add product to cart
+router.post('/add-product-to-cart', indexController.addProductToCart);
+
+// =============
+// AUTHENTICATED
+// =============
+
+// add product to wishlist
+router.post('/add-product-to-wishlist', indexController.addProductToWishlist);
+
+// proceed order
+router.post('/order', indexController.proceedOrder);
 
 export default router;

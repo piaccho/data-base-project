@@ -15,4 +15,7 @@ router.post('/sign-up', authController.createAccount);
 // sign in
 router.post('/sign-in', authController.signIn);
 
+// refresh
+router.post('/refresh', authController.refreshTokenVerify); 
+
 export default router;

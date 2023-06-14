@@ -1,27 +1,30 @@
 import Category from '#root/src/models/categoryModel.js'
 import Product from '#root/src/models/productModel.js'
-import Cart from '#root/src/models/cartModel.js'
-
+import User from '#root/src/models/userModel.js'
+import Order from '#root/src/models/orderModel.js'
+import Wishlist from '#root/src/models/wishlistModel.js'
 
 const userController = {
-    getIndex: async (req, res) => {
-        const categories = await Category.find({});
-        res.render('index', { categories: categories, user: true });
+    getProfileIndex: async (req, res) => {
+        // const categories = await Category.find({});
+        res.render('profile');
     },
 
-    addProductToCart: async (req, res) => {
-        const {
-            productid,
-            quantity,
-        } = req.body;
+    getOrdersIndex: async (req, res) => {
+        // const categories = await Category.find({});
+        res.render('orders');
+    },
 
-        console.log(req.body);
-        // 
+    getWishlistsIndex: async (req, res) => {
+        // const categories = await Category.find({});
+        res.render('wishlists');
+    },
 
-        // const productId = req.query.productid;
-        // const product = await Product.find({ _id: productId });
-        // res.render('product', { product: product });
-    }
+    getCartIndex: async (req, res) => {
+        const user = await signinUser(req.query.username, req.query.password);
+
+        res.render('cart', {user: user});
+    },
 };
 
 export default userController;

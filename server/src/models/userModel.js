@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     firstname: {
@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique: true,
     },
     phone: {
         type: String,
@@ -24,6 +25,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -34,12 +36,54 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
         required: true,
     },
-    type: {
+    role: {
         type: String,
+        trim: true,
         enum: ['user', 'admin'],
         default: 'user',
         required: true,
-    }
+    },
+    wishlists: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Wishlist',
+            default: [],
+            required: true,
+        }
+    ],
+    orders: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Order',
+            default: [],
+            required: true,
+        }
+    ],
+    preferedpayment: {
+        type: String,
+        trim: true,
+        enum: ['card', 'paypal', 'on-delivery'],
+        default: 'on-delivery',
+        required: true,
+    },
+    cart: {
+        items: [{
+            product: {
+                type: Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true,
+            },
+            quantity: {
+                type: Number,
+                required: true,
+            },
+        }],
+        total: {
+            type: Number,
+            required: true,
+            default: 0,
+        }
+    },
 });
 
 const User = mongoose.model('User', userSchema);
