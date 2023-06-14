@@ -1,25 +1,33 @@
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
+import mongodb from 'mongodb';
+import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
 import {validateAccountData, hashPassword, checkPassword} from './utility.js'
 
+import {Category} from './src/models/categoryModel.js'
+import {Product} from './src/models/productModel.js'
+
 const port = 8001;
+// const mongodbURI = process.env.MONGODB_URI;
+// const MongoClient = mongodb.MongoClient;
+// const client = new MongoClient(mongodbURI);
+// await client.connect();
+// const db = client.db('webshop');
+// const categories = await db.collection('categories').find().toArray().then(arr => arr.map(o => o.name))
 
-import mongodb, { ObjectId } from 'mongodb';
+// const url = 'mongodb+srv://<username>:<password>@<cluster>.mongodb.net/webshop?retryWrites=true&w=majority'
 
-const MongoClient = mongodb.MongoClient;
-const client = new MongoClient('mongodb://127.0.0.1:27017');
-await client.connect();
-const db = client.db('webshop');
-const categories = await db.collection('categories').find().toArray().then(arr => arr.map(o => o.name))
+
+
 // const users = await db.collection('customers').find().toArray().then(arr => arr.map(o => 
 //     {
 //         username: o.login, 
 //         password: o.password
 //     }
 //     ));
-// import mongoose from 'mongoose';
+// 
 // async function main() {
 //     await mongoose.connect('mongodb://127.0.0.1:27017/webshop');
 // }
@@ -50,6 +58,34 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/src/public')); 
 app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 
+/* ************************************************ */
+
+const uri = 'mongodb+srv://piacho:piacho123@db-mongodb.axn6csn.mongodb.net/webshop?retryWrites=true&w=majority'
+// Połączenie z bazą danych MongoDB
+// mongoose.connect(mongodbURI.concat("webshop"), {
+await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => {
+        console.log('Connected to the database');
+    })
+    .catch((err) => {
+        console.error('Error connecting to the database', err);
+        process.exit();
+    });
+
+const allCategories = await (async () => {
+    try {
+        const categories = await Category.find({}, 'name');
+        return categories.map(category => category.name);
+    } catch (err) {
+        console.error(err);
+    }
+})();
+
+// const products = await Product.find({ category: 'Elektronika' }).then(products => products.toArray());
+// console.log(products);
 
 /* ******** */
 /* "Routes" */
@@ -57,7 +93,7 @@ app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 
 // main
 app.get('/', async function (req, res) {
-    res.render('index', {categories: categories}); // Render the 'index' view
+    res.render('index', {categories: allCategories}); // Render the 'index' view
 });
 
 // show customers
@@ -68,27 +104,51 @@ app.get('/customers', async (req, res) => {
 // get all products
 app.get('/products', async function (req, res) {
     const collection = db.collection('products')
-    const products = await collection.aggregate([
+    // const products = await collection.aggregate([
+    //     {
+    //         $lookup: {
+    //         from: "categories", 
+    //         localField: "category", 
+    //         foreignField: "_id", 
+    //         as: "categoryData" 
+    //         }
+    //     },
+    //     {
+    //         $unwind: "$categoryData" 
+    //     },
+    //     {
+    //         $project: {
+    //         _id: 1,
+    //         name: 1,
+    //         category: "$categoryData.name",
+    //         description: 1,
+    //         price: 1,
+    //         units: 1,
+    //         image: 1
+    //         }
+    //     }
+    // ]).toArray();
+    const products = await Product.aggregate([
         {
             $lookup: {
-            from: "categories", 
-            localField: "category", 
-            foreignField: "_id", 
-            as: "categoryData" 
+                from: 'categories',
+                localField: 'category',
+                foreignField: '_id',
+                as: 'categoryData'
             }
         },
         {
-            $unwind: "$categoryData" 
+            $unwind: '$categoryData'
         },
         {
             $project: {
-            _id: 1,
-            name: 1,
-            category: "$categoryData.name",
-            description: 1,
-            price: 1,
-            units: 1,
-            image: 1
+                _id: 1,
+                name: 1,
+                category: '$categoryData.name',
+                description: 1,
+                price: 1,
+                units: 1,
+                image: 1
             }
         }
     ]).toArray();
@@ -98,37 +158,9 @@ app.get('/products', async function (req, res) {
 // get products by category
 app.get('/products/:category', async function (req, res) {
     console.log("GET products category");
-    const collection = db.collection('products')
-    const products = await collection.aggregate([
-        {
-            $lookup: {
-            from: "categories", 
-            localField: "category", 
-            foreignField: "_id", 
-            as: "categoryData" 
-            }
-        },
-        {
-            $unwind: "$categoryData" 
-        },
-        {
-            $match: {
-                "categoryData.name": req.query.category
-                }
-        },
-        {
-            $project: {
-            _id: 1,
-            name: 1,
-            category: "$categoryData.name",
-            description: 1,
-            price: 1,
-            units: 1,
-            image: 1
-            }
-        }
-    ]).toArray();
-    res.render("products", {data: products}); 
+    // const products = await Product.find({ category: 'Elektronika' }).then(ca);
+    // // console.log(products);
+    // res.render("products", {data: products}); 
 });
 
 // get products by keywords
