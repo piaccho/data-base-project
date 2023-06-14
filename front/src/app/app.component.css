@@ -1,0 +1,7 @@
+#header-nav-container {
+    position: sticky;
+    width: 100%;
+    z-index: 1;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}

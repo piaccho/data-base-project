@@ -1,0 +1,14 @@
+<header>
+    <div class="logo">
+        <img src="../../../assets/images/logo.png" alt="Logo aplikacji">
+        <p>since 2023</p>
+    </div>
+    <div id="input-container">
+        <input type="text" name="productName" placeholder="Search for products" [(ngModel)]="productName" (input)="filterProductName()">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+    </div>
+    <div id="button-container">
+        <button class="login-button">Logowanie</button>
+        <button class="register-button">Rejestracja</button>
+    </div>
+</header>

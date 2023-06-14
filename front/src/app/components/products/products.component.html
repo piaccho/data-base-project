@@ -1,0 +1,4 @@
+<h2>Lista produktów</h2>
+<div id="products-container">
+    <app-product [product]="product" *ngFor="let product of products | filter : filteredProductName"></app-product>
+</div>
