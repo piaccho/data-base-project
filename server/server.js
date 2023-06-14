@@ -1,45 +1,9 @@
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
-import mongodb from 'mongodb';
-import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
-import {validateAccountData, hashPassword, checkPassword} from './utility.js'
 
-import {Category} from './src/models/categoryModel.js'
-import {Product} from './src/models/productModel.js'
-
-const port = 8001;
-// const mongodbURI = process.env.MONGODB_URI;
-// const MongoClient = mongodb.MongoClient;
-// const client = new MongoClient(mongodbURI);
-// await client.connect();
-// const db = client.db('webshop');
-// const categories = await db.collection('categories').find().toArray().then(arr => arr.map(o => o.name))
-
-// const url = 'mongodb+srv://<username>:<password>@<cluster>.mongodb.net/webshop?retryWrites=true&w=majority'
-
-
-
-// const users = await db.collection('customers').find().toArray().then(arr => arr.map(o => 
-//     {
-//         username: o.login, 
-//         password: o.password
-//     }
-//     ));
-// 
-// async function main() {
-//     await mongoose.connect('mongodb://127.0.0.1:27017/webshop');
-// }
-// main().catch(err => console.log(err));
-// const productSchema = new mongoose.Schema({
-//     name: String,
-//     category: String,
-//     description: String,
-//     price: Number,
-//     image: String,
-// });
-
+const port = process.env.PORT || 8001;
 
 /* *************************** */
 /* Configuring the application */
@@ -60,169 +24,71 @@ app.use(express.urlencoded({ extended: false })); // for parsing form sent data
 
 /* ************************************************ */
 
-const uri = 'mongodb+srv://piacho:piacho123@db-mongodb.axn6csn.mongodb.net/webshop?retryWrites=true&w=majority'
-// Połączenie z bazą danych MongoDB
-// mongoose.connect(mongodbURI.concat("webshop"), {
-await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => {
-        console.log('Connected to the database');
-    })
-    .catch((err) => {
-        console.error('Error connecting to the database', err);
-        process.exit();
-    });
-
-const allCategories = await (async () => {
-    try {
-        const categories = await Category.find({}, 'name');
-        return categories.map(category => category.name);
-    } catch (err) {
-        console.error(err);
-    }
-})();
-
-// const products = await Product.find({ category: 'Elektronika' }).then(products => products.toArray());
-// console.log(products);
 
 /* ******** */
 /* "Routes" */
 /* ******** */
 
-// main
-app.get('/', async function (req, res) {
-    res.render('index', {categories: allCategories}); // Render the 'index' view
+import indexRouter from './src/routes/indexRouter.js';
+import authRouter from './src/routes/authRouter.js';
+import userRouter from './src/routes/userRouter.js';
+// import adminRouter from './src/routes/adminRouter.js';
+
+app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
+// app.use('/admin', adminRouter);
+
+// Obsługa błędów 404 (Nie znaleziono)
+app.use((req, res, next) => {
+    res.status(404).send('Not found');
 });
 
-// show customers
-app.get('/customers', async (req, res) => {
-    res.json(await db.collection("customers").find().toArray());
+// Obsługa innych błędów
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
 });
 
-// get all products
-app.get('/products', async function (req, res) {
-    const collection = db.collection('products')
-    // const products = await collection.aggregate([
-    //     {
-    //         $lookup: {
-    //         from: "categories", 
-    //         localField: "category", 
-    //         foreignField: "_id", 
-    //         as: "categoryData" 
-    //         }
-    //     },
-    //     {
-    //         $unwind: "$categoryData" 
-    //     },
-    //     {
-    //         $project: {
-    //         _id: 1,
-    //         name: 1,
-    //         category: "$categoryData.name",
-    //         description: 1,
-    //         price: 1,
-    //         units: 1,
-    //         image: 1
-    //         }
-    //     }
-    // ]).toArray();
-    const products = await Product.aggregate([
-        {
-            $lookup: {
-                from: 'categories',
-                localField: 'category',
-                foreignField: '_id',
-                as: 'categoryData'
-            }
-        },
-        {
-            $unwind: '$categoryData'
-        },
-        {
-            $project: {
-                _id: 1,
-                name: 1,
-                category: '$categoryData.name',
-                description: 1,
-                price: 1,
-                units: 1,
-                image: 1
-            }
-        }
-    ]).toArray();
-    res.render("products", {data: products});
-});
 
-// get products by category
-app.get('/products/:category', async function (req, res) {
-    console.log("GET products category");
-    // const products = await Product.find({ category: 'Elektronika' }).then(ca);
-    // // console.log(products);
-    // res.render("products", {data: products}); 
-});
+// app.get('/hashpass', (req, res) => {
+//     const password =  hashPassword(req.query.password);
+//     console.log({password});
+// })
 
-// get products by keywords
-app.get('/search_query', async function (req, res) {
-    const { query } = req.query; 
-    try {
-        // Wyszukaj produkty, które pasują do zadanego słowa kluczowego
-        const products = await db.collection('products').find({
-            $or: [
-            { name: { $regex: query, $options: 'i' } },
-            { description: { $regex: query, $options: 'i' } },
-            ]
-        })
-        .toArray();
-        console.log(products);
-        res.render('products', {data: products})
-    } catch (error) {
-        console.error('Error searching for products:', error);
-        res.status(500).send('An error occurred');
-    }
-    
-    // res.render("products", {data: products}); 
-});
+// app.get('/testpass', (req, res) => {
+//     const samePass = checkPassword(req.query.password, db);
+//     console.log({samePass});
+// })
 
-app.get('/hashpass', (req, res) => {
-    const password =  hashPassword(req.query.password);
-    console.log({password});
-})
-
-app.get('/testpass', (req, res) => {
-    const samePass = checkPassword(req.query.password, db);
-    console.log({samePass});
-})
-
-// register an account
-app.post('/register', async (req, res) => {
-    console.log(req.body);
-    if(await validateAccountData(req.body, db, res) !== null) {
-        const {
-            firstname,
-            lastname,
-            email,
-            phone,
-            address,
-            username,
-        } = req.body;
+// // register an account
+// app.post('/register', async (req, res) => {
+//     console.log(req.body);
+//     if(await validateAccountData(req.body, db, res) !== null) {
+//         const {
+//             firstname,
+//             lastname,
+//             email,
+//             phone,
+//             address,
+//             username,
+//         } = req.body;
         
-        // const password = await hashPassword(req.body.password);
-        const password = 
+//         // const password = await hashPassword(req.body.password);
+//         const password = 
         
-        db.collection('users').insertOne({
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            phone: phone,
-            address: address,
-            username: username,
-            password: password,
-        })
-        res.send("Registration was successfull")
-    }
-});
+//         db.collection('users').insertOne({
+//             firstname: firstname,
+//             lastname: lastname,
+//             email: email,
+//             phone: phone,
+//             address: address,
+//             username: username,
+//             password: password,
+//         })
+//         res.send("Registration was successfull")
+//     }
+// });
 
 
 // // buy product

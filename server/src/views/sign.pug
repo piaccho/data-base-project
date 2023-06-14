@@ -1,0 +1,86 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title WebShop server
+        style(type='text/css').
+            main {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
+            fieldset {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .alert {
+                color:green;
+            }
+    body
+        h1 WebShop server features testing - Sign Router
+        main
+            if flag=="sign-in"
+                if created
+                    h3(class="alert") Account created successfully!
+                fieldset 
+                    h2 Sign in 
+                    form(method='POST' action='/auth/sign-in')
+                        label(for="username") User name:
+                        br
+                        input(type="text", name="username", required)
+                        br
+                        label(for="password") Password:
+                        br
+                        input(type="password", name="password", required)
+                        br
+                        br
+                        input(type="submit", value="Sign in")
+                        br
+                        input(type='reset')
+                fieldset 
+                    form(method='GET' action='/auth/sign-up')
+                        input(type='submit', value="Sign up")
+            else 
+                fieldset 
+                    h2 Register an account 
+                    form(method='POST' action='/auth/sign-up')
+                        label(for="email") Email address:
+                        br
+                        input(type="text", name="email", required)
+                        br
+                        label(for="username") User name:
+                        br
+                        input(type="text", name="username", required)
+                        br
+                        label (at least 5 characters)
+                        br
+                        label(for="password") Password:
+                        br
+                        input(type="password", name="password", required)
+                        br
+                        label (at least 8 characters and at least one number)
+                        br
+                        label(for="firstname") First name:
+                        br
+                        input(type="text", name="firstname", required)
+                        br
+                        label(for="lastname") Last name:
+                        br
+                        input(type="text", name="lastname", required)
+                        br
+                        label(for="address") Address:
+                        br
+                        input(type="text", name="address", required)
+                        br
+                        label(for="phone") Phone:
+                        br
+                        input(type="text", name="phone", required)
+                        br
+                        br
+                        input(type="submit", value="Register")
+                        br
+                        input(type='reset')
+                

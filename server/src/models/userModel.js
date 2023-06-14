@@ -32,9 +32,16 @@ const userSchema = new mongoose.Schema({
     registerDate: {
         type: Date,
         default: Date.now,
+        required: true,
     },
+    type: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user',
+        required: true,
+    }
 });
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;

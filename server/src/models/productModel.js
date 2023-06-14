@@ -7,8 +7,7 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     category: {
-        type: Schema.Types.ObjectId, 
-        ref: 'Category',
+        type: String, 
         required: true,
     },
     description: {
@@ -29,4 +28,6 @@ const productSchema = new mongoose.Schema({
     },
 });
 
-export const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', productSchema);
+
+export default Product;

@@ -32,12 +32,15 @@ html(lang='en')
                                 td #{row.price} zł
                                 td #{row.units}
                                 td
-                                    form(method='GET' action='/buy')
-                                        label(for="quantity") Liczba sztuk:
+                                    form(method='POST' action='/add-product-to-cart')
+                                        label(for="quantity") Quantity:
                                         br
                                         input(type="text", name="quantity", maxlength="4", required)
                                         br
-                                        input(type="hidden", name="_id", value=row._id)
-                                        input(type="submit", value="Buy product")
+                                        input(type="hidden", name="productid", value=row._id)
+                                        input(type="submit", value="Add product to cart")
+                                    form(method='GET' action='/product')
+                                        input(type="hidden", name="productid", value=row._id)
+                                        input(type="submit", value="Show product")
 
                                 

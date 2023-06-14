@@ -6,7 +6,21 @@ html(lang='en')
         title WebShop server
     body
         main
-            h1 WebShop server features testing 
+            - var prefix = "";
+            if user 
+                - prefix = "/user";
+            if user 
+                h1 WebShop server features testing - Index Router
+            else
+                h1 WebShop server features testing - User Router
+            if user 
+                fieldset 
+                    form(method='GET' action='/user/profile')
+                        input(type='submit', value="Adjust profile")
+                    form(method='GET' action='/user/orders')
+                        input(type='submit', value="Show orders")
+                    form(method='GET' action='/user/wishlists')
+                        input(type='submit', value="Show wishlists")
             fieldset 
                 h2 Get all products 
                 form(method='GET' action='/products')
@@ -18,14 +32,14 @@ html(lang='en')
                     br
                     select(name="category", required)
                         each c in categories
-                            option(value=c) #{c}
+                            option(value=c.name) #{c.name}
                     br
                     br
                     input(type='submit', value="Get products")
                     input(type='reset')
             fieldset 
                 h2 Get products by keywords 
-                form(method='GET' action='/search_query')
+                form(method='GET' action='/search')
                     label(for='query') Search bar:
                     br
                     input(name='query')
@@ -33,58 +47,9 @@ html(lang='en')
                     br
                     input(type='submit', value="Get products")
                     input(type='reset')
-            fieldset 
-                h2 Register an account 
-                form(method='POST' action='/register')
-                    label(for="firstname") Imię:
-                    br
-                    input(type="text", name="firstname", required)
-                    br
-                    label(for="lastname") Nazwisko:
-                    br
-                    input(type="text", name="lastname", required)
-                    br
-                    label(for="address") Adres:
-                    br
-                    input(type="text", name="address", required)
-                    br
-                    label(for="phone") Telefon:
-                    br
-                    input(type="text", name="phone", required)
-                    br
-                    label(for="email") Adres email:
-                    br
-                    input(type="text", name="email", required)
-                    br
-                    label(for="username") Nazwa użytkownika:
-                    br
-                    input(type="text", name="username", required)
-                    br
-                    label (co najmniej 5 znaków)
-                    br
-                    label(for="password") Hasło:
-                    br
-                    input(type="password", name="password", required)
-                    br
-                    label (co najmniej 8 znaków i co najmniej jedna duża litera i cyfra)
-                    br
-                    br
-                    input(type="submit", value="Register")
-                    br
-                    input(type='reset')
-            fieldset 
-                h2 Login 
-                form(method='POST' action='/login')
-                    label(for="login") Login:
-                    br
-                    input(type="text", name="login", required)
-                    br
-                    label(for="password") Hasło:
-                    br
-                    input(type="password", name="password", required)
-                    br
-                    br
-                    input(type="submit", value="Login")
-                    br
-                    input(type='reset')
-            
+            if !user
+                fieldset 
+                    form(method='GET' action='/auth/sign-in')
+                        input(type='submit', value="Sign in")
+                    form(method='GET' action='/auth/sign-up')
+                        input(type='submit', value="Sign up")
