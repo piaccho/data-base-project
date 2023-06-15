@@ -18,7 +18,6 @@ Backend naszego projektu oparty jest o serwer w technologii `Node.js` z framewor
 
 ## Specyfikacja kolekcji
 
-Część mock danych zostało wygenerowane przy pomocy [JSON GENERATOR](https://json-generator.com/)
 
 ### 1. ***users*** (Użytkownicy):
 
