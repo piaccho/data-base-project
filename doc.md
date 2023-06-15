@@ -1,7 +1,7 @@
 # Dokumentacja
 Backend naszego projektu oparty jest o serwer w technologii `Node.js` z frameworkiem `Express.js` oraz bazą danych w technologii `MongoDB` 
 
-## Planowane funkcjonalności
+## Funkcjonalności
 - Rejestracja i logowanie użytkowników:
     - Możliwość tworzenia konta oraz logowanie.
 - Przeglądanie i wyszukiwanie produktów:
