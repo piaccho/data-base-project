@@ -135,3 +135,6 @@ Przykładowy dokument
 
 ## Najciekawsze endpointy
 
+- dodawanie do koszyka
+- dodawanie recenzji
+- 

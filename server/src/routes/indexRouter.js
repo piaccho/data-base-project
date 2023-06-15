@@ -21,6 +21,9 @@ router.get('/search', indexController.searchProductsByKeywords);
 // show product
 router.get('/product', indexController.showProduct);
 
+// post review
+router.post('/product/review', indexController.postReview);
+
 // add product to cart
 router.post('/add-product-to-cart', indexController.addProductToCart);
 

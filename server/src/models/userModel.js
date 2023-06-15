@@ -3,22 +3,22 @@ import { wishlistSchema } from '#root/src/models/wishlistModel.js'
 import { orderSchema } from '#root/src/models/orderModel.js'
 
 const reviewSchema = new mongoose.Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+    username: {
+        type: String,
         required: true,
     },
     rating: {
         type: Number,
         required: true,
     },
-    review: {
+    description: {
         type: String,
         required: true,
     },
-    date: {
+    createdDate: {
         type: Date,
         default: Date.now,
+        required: true,
     },
 });
 

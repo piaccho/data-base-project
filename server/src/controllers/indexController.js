@@ -1,5 +1,5 @@
 import Category from '#root/src/models/categoryModel.js'
-import Product from '#root/src/models/productModel.js'
+import Product, { Review } from '#root/src/models/productModel.js'
 
 import { isTokenValid, signinUser, signinUserId, userQuery } from '#root/src/util/utility.js'
 
@@ -51,7 +51,41 @@ const indexController = {
 
         const productId = req.query.productid;
         const product = await Product.findOne({ _id: productId });
-        res.render('product', { product: product, user: user });
+
+        let averageRating;
+        if (!product.reviews || product.reviews.length === 0) {
+            averageRating = 0;
+        } else {
+            const ratings = product.reviews.map(review => review.rating);
+            averageRating = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
+        }
+
+        res.render('product', { product: product, user: user, avgRating: averageRating });
+    },
+
+    postReview: async (req, res) => {
+        const {rating, description, productid, userid} = req.body;
+        const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" })
+        
+        // check if product exists
+        const product = await Product.findOne({ _id: productid });
+        if(!product) {
+            return res.status(400).json({ error: 'Couldnt find the product' });
+        }
+
+        // create new review
+        const newReview = new Review({
+            username: user.username,
+            rating,
+            description
+        });
+
+        product.reviews.push(newReview);
+
+        await product.save();
+
+        res.redirect("/products" + userQuery(user));
     },
 
     addProductToCart: async (req, res) => {

@@ -5,7 +5,7 @@ html(lang='en')
         meta(name='viewport' content='width=device-width, initial-scale=1')
         title WebShop server
         style(type='text/css').
-            fieldset {
+            #product-details {
                 display: flex;
                 justify-content: center;
             }
@@ -53,11 +53,12 @@ html(lang='en')
                         input(type="hidden", name="username", value=user.username)
                         input(type="hidden", name="password", value=user.password)
                         input(type='submit', value=cartLabel)
-            fieldset 
+            fieldset(id="product-details") 
                 img(src=product.image, alt="product_img", style="height: 300px")
                 div
                     h2 #{product.category}
                     h1 #{product.name}
+                    //- p #{product.}
                     p #{product.description}
                     h3 Price: #{product.price} zł
                     p Available units: #{product.units}
@@ -75,3 +76,30 @@ html(lang='en')
                             input(type="hidden", name="userid", value=user._id)
                         input(type="hidden", name="productid", value=product._id)
                         input(type="submit", value="Add product to wishlist")
+            fieldset 
+                fieldset 
+                    h2 Wystaw opinie
+                    form(method='POST' action='/product/review')
+                        label(for="rating") Rating:
+                        br
+                        select(name="rating", required)
+                            each c in [1,2,3,4,5]
+                                option(value=c) #{c}
+                        br
+                        label(for="description") Description:
+                        br
+                        textarea(id="review", name="description", rows="4", cols="50", required)
+                        br
+                        if user 
+                            input(type="hidden", name="userid", value=user._id)
+                        br
+                        input(type="hidden", name="productid", value=product._id)
+                        input(type="submit", value="Add review")
+                fieldset 
+                    h2 Opinie innych użytkowników
+                    each review in product.reviews
+                        fieldset
+                            h3 #{review.username}
+                            p 
+                                i #{review.description}
+                            p Ocena: #{review.rating}/5

@@ -3,22 +3,22 @@ import { Schema } from "mongoose";
 import { userSchema } from '#root/src/models/userModel.js'
 
 const reviewSchema = new mongoose.Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+    username: {
+        type: String,
         required: true,
     },
     rating: {
         type: Number,
         required: true,
     },
-    review: {
+    description: {
         type: String,
         required: true,
     },
-    date: {
+    createdDate: {
         type: Date,
         default: Date.now,
+        required: true,
     },
 });
 
@@ -52,7 +52,8 @@ const productSchema = new Schema({
     ]
 });
 
+const Review = mongoose.model('Review', reviewSchema);
 const Product = mongoose.model('Product', productSchema);
 
-export { productSchema }
+export { productSchema, Review }
 export default Product;
