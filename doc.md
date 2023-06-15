@@ -225,10 +225,20 @@ Przykładowy dokument
 
 
 ## Najciekawsze endpointy
-
+```js
+// Użyte trasy
+app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
+app.use('/admin', adminRouter);
+```
 
 
 - dodawanie produktu do koszyka
+```js
+// indexRouter
+router.post('/add-product-to-cart', indexController.addProductToCart);
+```
 ```js
 addProductToCart: async (req, res) => {
         let quantity = parseInt(req.body.quantity);
@@ -265,6 +275,10 @@ addProductToCart: async (req, res) => {
 ```
 - dodawanie recenzji do produktu
 ```js
+// indexRouter
+router.post('/product/review', indexController.postReview);
+```
+```js
 postReview: async (req, res) => {
         const {rating, description, productid, userid} = req.body;
         const user = await signinUserId(userid);
@@ -292,6 +306,10 @@ postReview: async (req, res) => {
 ```
 - wyszukiwanie produktów po nazwie
 ```js
+// indexRouter
+router.get('/search', indexController.searchProductsByKeywords);
+```
+```js
 searchProductsByKeywords: async (req, res) => {
         const user = await signinUser(req.query.username, req.query.password);
 
@@ -307,6 +325,10 @@ searchProductsByKeywords: async (req, res) => {
 ```
 
 - rejestracja konta
+```js
+// authRouter
+router.post('/sign-up', authController.createAccount);
+```
 ```js
 createAccount: async (req, res) => {
         try {
@@ -364,6 +386,10 @@ createAccount: async (req, res) => {
 
 - modyfikacja produktów w koszyku
 ```js
+// userRouter
+router.post('/cart/modify', userController.modifyCartItem);
+```
+```js
 modifyCartItem: async (req, res) => {
         let newQuantity = parseInt(req.body.quantity);
         const { productid, userid } = req.body
@@ -397,6 +423,10 @@ modifyCartItem: async (req, res) => {
 ```
 
 - przetwarzanie zamówienia
+```js
+// userRouter
+router.post('/order/submit', userController.proceedOrder);
+```
 ```js
 proceedOrder: async (req, res) => {
         console.log(req.body);
