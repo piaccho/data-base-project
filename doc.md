@@ -222,9 +222,230 @@ Przykładowy dokument
 }
 ```
 
+
+
 ## Najciekawsze endpointy
 
-- dodawanie do koszyka
-- dodawanie recenzji
+
+
+- dodawanie produktu do koszyka
+```js
+addProductToCart: async (req, res) => {
+        let quantity = parseInt(req.body.quantity);
+        const {productid, userid} = req.body
+        const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" })
+
+        const product = await Product.findById(productid);
+
+        // check if cartItem exists
+        const existingItem = user.cart.items.find(item => item.product.equals(product));
+
+        if (existingItem) {
+            if (existingItem.quantity + quantity > product.units) {
+                return res.status(400).json({ error: 'Quantity exceeds product units' });
+            }
+            existingItem.quantity += quantity;
+        } else {
+            if (quantity > product.units) {
+                return res.status(400).json({ error: 'Quantity exceeds product units' });
+            }
+            user.cart.items.push({ product: product, quantity });
+        }
+
+        // update total price and quantity
+        user.cart.totalQuantity += quantity;
+        user.cart.totalPrice += quantity * product.price;
+
+        await user.save();
+
+        res.redirect("/products" + userQuery(user));
+    }
+
+```
+- dodawanie recenzji do produktu
+```js
+postReview: async (req, res) => {
+        const {rating, description, productid, userid} = req.body;
+        const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" })
+        
+        // check if product exists
+        const product = await Product.findOne({ _id: productid });
+        if(!product) {
+            return res.status(400).json({ error: 'Couldnt find the product' });
+        }
+
+        // create new review
+        const newReview = new Review({
+            username: user.username,
+            rating,
+            description
+        });
+
+        product.reviews.push(newReview);
+
+        await product.save();
+
+        res.redirect("/product" + userQuery(user) + "&productid=" + productid);
+    }
+```
+- wyszukiwanie produktów po nazwie
+```js
+searchProductsByKeywords: async (req, res) => {
+        const user = await signinUser(req.query.username, req.query.password);
+
+        const query = req.query.query;
+        const allProductsByQuery = await Product.find({
+            $or: [
+                { name: { $regex: query, $options: 'i' } },
+                { description: { $regex: query, $options: 'i' } },
+            ]
+        });
+        res.render("products", { data: allProductsByQuery, user: user });
+    }
+```
+
+- rejestracja konta
+```js
+createAccount: async (req, res) => {
+        try {
+            const {
+                email,
+                username,
+                password,
+                firstname,
+                lastname,
+                address,
+                phone,
+            } = req.body;
+
+            // validate fields
+            if (!validateEmail(email)) {
+                return res.status(400).json({ error: 'Incorrect email.' });
+            }
+            if (!validateUsername(username)) {
+                return res.status(400).json({ error: 'Username must be at least 6 characters long.' });
+            }
+            if (!validatePassword(password)) {
+                return res.status(400).json({ error: 'The password must have at least 8 characters, one capital letter and one number' });
+            }
+
+
+            // check if user exists
+            const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+            if (existingUser) {
+                if (existingUser.email === email) {
+                    return res.status(400).json({ error: 'User with given email address already exists.' });
+                } else if (existingUser.username === username) {
+                    return res.status(400).json({ error: 'User with given email address already exists.' });
+                }
+            }
+
+            // create new user
+            const user = new User({
+                firstname,
+                lastname,
+                email,
+                phone,
+                address,
+                username,
+                password,
+            });
+
+            await user.save();
+
+            res.render('sign', { flag: "sign-in", created: true });
+        } catch (error) {
+            res.status(500).json({ error: "Register error: " + error });
+        }
+    }
+```
+
+- modyfikacja produktów w koszyku
+```js
+modifyCartItem: async (req, res) => {
+        let newQuantity = parseInt(req.body.quantity);
+        const { productid, userid } = req.body
+        const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" })
+
+        const product = await Product.findById(productid);
+
+        // check if cartItem exists
+        const modifiedItem = user.cart.items.find(item => item.product.equals(product));
+
+        if (!modifiedItem) {
+            return res.status(400).json({ error: 'Cannot find an a product' });
+        } 
+
+        if (newQuantity > product.units) {
+            return res.status(400).json({ error: 'Quantity exceeds product units' });
+        }
+
+        const previousQuantity = modifiedItem.quantity;
+        modifiedItem.quantity = newQuantity;
+
+        // update total price and quantity
+        user.cart.totalQuantity = user.cart.totalQuantity - previousQuantity + newQuantity;
+        user.cart.totalPrice = user.cart.totalPrice + (newQuantity - previousQuantity) * product.price;
+
+        await user.save();
+
+        res.redirect("/user/cart" + userQuery(user));
+    }
+```
+
 - przetwarzanie zamówienia
-- 
+```js
+proceedOrder: async (req, res) => {
+        console.log(req.body);
+        const userid = req.body.userid;
+        const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" });
+
+        let total = 0;
+        for (const item of user.cart.items) {
+            const productId = item.product._id;
+            const quantity = item.quantity;
+
+            const product = await Product.findById(productId);
+            if (!product) {
+                console.log(`Couldnt find product ${productId}.`);
+                continue;
+            }
+
+            product.units -= quantity;
+            total = quantity * product.price;
+
+            await product.save();
+
+            console.log(`Updated product units ${product.name}.`);
+        }
+
+        user.cart.items.forEach(item => {console.log(item);})
+
+        const newOrder = new Order({
+            user: user,
+            products: user.cart.items.map(item => ({
+                product: item.product,
+                quantity: item.quantity,
+            })),
+            totalQuantity: user.cart.totalQuantity,
+            totalPrice: user.cart.totalPrice,
+            address: user.address,
+            status: 'pending',
+        });
+
+
+        await newOrder.save();
+
+        user.cart.totalQuantity = 0;
+        user.cart.totalPrice = 0;
+        user.cart.items = [];
+        user.orders.push(newOrder);
+        await user.save();
+
+        res.redirect("/" + userQuery(user));
+    }
+```
