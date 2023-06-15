@@ -60,7 +60,7 @@ export const signinUser = async (username, password) => {
 }
 
 export const signinUserId = async (id) => {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate('cart.items.product');
 
     // check if user exists
     if (!user) {
@@ -69,3 +69,5 @@ export const signinUserId = async (id) => {
 
     return user;
 }
+
+export const userQuery = (user) => `?username=${user.username}&password=${user.password}`;

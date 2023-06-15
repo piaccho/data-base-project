@@ -4,9 +4,24 @@ html(lang='en')
         meta(charset='utf-8')
         meta(name='viewport' content='width=device-width, initial-scale=1')
         title WebShop server
+        style(type='text/css').
+            #nav {
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                background-color: grey;
+                border: 1px solid black;
+            }
+            #nav input {
+                width: 100px;
+            }
     body
         main
             h1 WebShop server features testing - Admin Router
+            div(id="nav")
+                form(method='GET' action='/')
+                    input(type='submit', value="Log out")
+            br
             fieldset 
                 h2 Add category 
                 form(method='POST' action='/admin/add-category')

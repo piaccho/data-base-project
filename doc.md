@@ -10,22 +10,13 @@ Backend naszego projektu oparty jest o serwer w technologii `Node.js` z framewor
     - Możliwość przeglądania katalogu produktów, wyszukiwania produktów na podstawie kategorii, słów kluczowych itp.
 - Składanie zamówień:
     - Możliwość składania zamówienia na podstawie zawartości koszyka, wybierania opcji dostawy i płatności.
-- Zarządzanie zamówieniami:
-    - Możliwość śledzenia statusu zamówień, przeglądania historii zamówień i zarządzania nimi (np. anulowanie zamówienia, zgłaszanie zwrotów).
 - System ocen i recenzji:
     - Możliwość wystawiania ocen i pisania recenzji na temat produktów.
-- Listy życzeń:
-    - Możliwość tworzenia list życzeń, dodawania produktów do listy, udostępniania ich innym użytkownikom.
-- Powiadomienia:
-    - Informuje mailowo użytkowników o istotnych aktualizacjach dotyczących zamówień, dostępności produktów, promocji itp.
-- Śledzenie przesyłek:
-    - Możliwość śledzenia statusu przesyłek, uzyskania informacji dotyczących przewoźnika i etapu dostawy.
 - Panel administracyjny:
     - Dla administratorów aplikacji umożliwia zarządzanie produktami, kategoriami, zamówieniami, użytkownikami, promocjami itp.
 
 
-## Schemat bazy danych
-### Specyfikacja kolekcji
+## Specyfikacja kolekcji
 
 Część mock danych zostało wygenerowane przy pomocy [JSON GENERATOR](https://json-generator.com/)
 
@@ -127,25 +118,8 @@ Przykładowy dokument
 
 }
 ```
-#### 6. ***suppliers*** (Dostawcy):
 
-Opis:
-- `_id` - ObjectId
-- `companyName` - String
-- `email` - String
-- `city` - String
-- `street` - String
-- `postalCode` - String
-- `phone` - String
-
-Przykładowy dokument
-```json
-{
-
-}
-```
-
-#### 7. ***wishlists*** (Listy życzeń):
+#### 6. ***wishlists*** (Listy życzeń):
 
 Opis:
 - `_id` - ObjectId
@@ -158,3 +132,6 @@ Przykładowy dokument
 
 }
 ```
+
+## Najciekawsze endpointy
+

@@ -1,17 +1,63 @@
 import mongoose, { Schema } from 'mongoose';
 
-const orderSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    rating: {
+        type: Number,
+        required: true,
+    },
+    review: {
+        type: String,
+        required: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
+const productSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    units: {
+        type: Number,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+    reviews: [
+        reviewSchema
+    ]
+});
+
+const orderSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
     products: [{
-        product: {
-            type: Schema.Types.ObjectId,
-            ref: 'Product',
-            required: true,
-        },
+        product: productSchema,
         quantity: {
             type: Number,
             required: true,
@@ -35,3 +81,4 @@ const orderSchema = new mongoose.Schema({
 const Order = mongoose.model('Order', orderSchema);
 
 export default Order;
+export { orderSchema };

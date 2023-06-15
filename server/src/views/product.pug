@@ -23,6 +23,11 @@ html(lang='en')
                 width: 100px;
             }
     body
+        form(method='GET' action='/')
+            if user
+                input(type="hidden", name="username", value=user.username)
+                input(type="hidden", name="password", value=user.password)
+            input(type='submit', value="Main page")
         h1 WebShop server features testing - Product route
         main
             if user
@@ -41,9 +46,13 @@ html(lang='en')
                         input(type='submit', value="Show wishlists")
                     br
                     form(method='GET' action='/user/cart')
-                        - var cartCounter = "Cart: " + user.cart.total
-                        input(type="hidden", name="userid", value=user._id)
-                        input(type='submit', value=cartCounter)
+                        if user.cart.items.length === 0
+                            - var cartLabel = `Cart`
+                        else 
+                            - var cartLabel = `Cart: ${user.cart.items.length} (${user.cart.totalPrice} zł)`
+                        input(type="hidden", name="username", value=user.username)
+                        input(type="hidden", name="password", value=user.password)
+                        input(type='submit', value=cartLabel)
             fieldset 
                 img(src=product.image, alt="product_img", style="height: 300px")
                 div

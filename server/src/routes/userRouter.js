@@ -16,4 +16,16 @@ router.get('/wishlists', userController.getWishlistsIndex);
 // get cart page 
 router.get('/cart', userController.getCartIndex);
 
+// clear cart 
+router.post('/cart/delete-all', userController.clearCart);
+
+// clear cart 
+router.post('/cart/modify', userController.modifyCartItem);
+
+// clear cart 
+router.post('/cart/delete', userController.deleteCartItem);
+
+// proceed order
+router.post('/order', userController.proceedOrder);
+
 export default router;

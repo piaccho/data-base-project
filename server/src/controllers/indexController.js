@@ -1,7 +1,7 @@
 import Category from '#root/src/models/categoryModel.js'
 import Product from '#root/src/models/productModel.js'
 
-import { isTokenValid, signinUser, signinUserId } from '#root/src/util/utility.js'
+import { isTokenValid, signinUser, signinUserId, userQuery } from '#root/src/util/utility.js'
 
 const indexController = {
     getIndex: async (req, res) => {
@@ -55,45 +55,40 @@ const indexController = {
     },
 
     addProductToCart: async (req, res) => {
-        console.log(req.body);
-        
-        const {quantity, productid, userid} = req.body
+        let quantity = parseInt(req.body.quantity);
+        const {productid, userid} = req.body
         const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" })
 
-        console.log(user);
         const product = await Product.findById(productid);
-        if (product.units < quantity) res.status(400).json({ status: "Quantity exceeds product units"})
 
-        const item = { product: product, quantity: quantity };
-        
-        user.cart.items.push(item);
-        user.save((err, user) => {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log('Added new item to cart:', user.cart.items);
-            }});
-        
-        product.units -= quantity;
-        product.save((err, product) => {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log('Updated units of:', product.name);
+        // check if cartItem exists
+        const existingItem = user.cart.items.find(item => item.product.equals(product));
+
+        if (existingItem) {
+            if (existingItem.quantity + quantity > product.units) {
+                return res.status(400).json({ error: 'Quantity exceeds product units' });
             }
-        });
+            existingItem.quantity += quantity;
+        } else {
+            if (quantity > product.units) {
+                return res.status(400).json({ error: 'Quantity exceeds product units' });
+            }
+            user.cart.items.push({ product: product, quantity });
+        }
 
-        const allProducts = await Product.find({});
-        res.render("products", { data: allProducts, user: user });
+        // update total price and quantity
+        user.cart.totalQuantity += quantity;
+        user.cart.totalPrice += quantity * product.price;
+
+        await user.save();
+
+        res.redirect("/products" + userQuery(user));
     },
 
     addProductToWishlist: async (req, res) => {
         
-        res.render('addingToWishlist', { product: product });
-    },
-
-    proceedOrder: async (req, res) => {
-        // res.render('product', { product: product });
+        // res.render('addingToWishlist', { product: product });
     },
 };
 

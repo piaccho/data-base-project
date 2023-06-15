@@ -1,6 +1,58 @@
 import mongoose, { Schema } from 'mongoose';
+import { wishlistSchema } from '#root/src/models/wishlistModel.js'
+import { orderSchema } from '#root/src/models/orderModel.js'
 
-const userSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    rating: {
+        type: Number,
+        required: true,
+    },
+    review: {
+        type: String,
+        required: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
+const productSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    units: {
+        type: Number,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+    reviews: [
+        reviewSchema
+    ]
+});
+
+export const userSchema = new mongoose.Schema({
     firstname: {
         type: String,
         required: true,
@@ -44,20 +96,10 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     wishlists: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Wishlist',
-            default: [],
-            required: true,
-        }
+        wishlistSchema
     ],
     orders: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Order',
-            default: [],
-            required: true,
-        }
+        orderSchema
     ],
     preferedpayment: {
         type: String,
@@ -67,18 +109,21 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     cart: {
-        items: [{
-            product: {
-                type: Schema.Types.ObjectId,
-                ref: 'Product',
-                required: true,
-            },
-            quantity: {
-                type: Number,
-                required: true,
-            },
-        }],
-        total: {
+        items: [
+            {
+                product: productSchema,
+                quantity: {
+                    type: Number,
+                    required: true,
+                },
+            }
+        ],
+        totalQuantity: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        totalPrice: {
             type: Number,
             required: true,
             default: 0,

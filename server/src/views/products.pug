@@ -17,9 +17,14 @@ html(lang='en')
                 border: 1px solid black;
             }
             #nav input {
-                width: 100px;
+                width: 150px;
             }
     body
+        form(method='GET' action='/')
+            if user
+                input(type="hidden", name="username", value=user.username)
+                input(type="hidden", name="password", value=user.password)
+            input(type='submit', value="Main page")
         h1 WebShop server - Products route
         main
             if user
@@ -38,9 +43,13 @@ html(lang='en')
                         input(type='submit', value="Show wishlists")
                     br
                     form(method='GET' action='/user/cart')
-                        - var cartCounter = "Cart: " + user.cart.total
-                        input(type="hidden", name="userid", value=user._id)
-                        input(type='submit', value=cartCounter)
+                        if user.cart.items.length === 0
+                            - var cartLabel = `Cart`
+                        else
+                            - var cartLabel = `Cart: ${user.cart.items.length} (${user.cart.totalPrice} zł)`
+                        input(type="hidden", name="username", value=user.username)
+                        input(type="hidden", name="password", value=user.password)
+                        input(type='submit', value=cartLabel)
             if data.length == 0
                 h3 Nie znaleziono produktów
             else

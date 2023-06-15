@@ -9,13 +9,41 @@ html(lang='en')
                 width: 100vw;
                 margin: 0 20px;
             }
+            #header {
+                display: flex;
+                justify-content: space-between;
+                margin: 0 20px;
+            }
+            #functions {
+                display: flex;
+            }
+            td {
+                text-align: center;
+            }
     body
+        form(method='GET' action='/')
+            if user
+                input(type="hidden", name="username", value=user.username)
+                input(type="hidden", name="password", value=user.password)
+            input(type='submit', value="Main page")
         h1 WebShop server - Cart route
         main
-            if user.cart.total == 0
+            if user.cart.totalQuantity == 0
                 h3 Cart is empty
             else
-                h3 Cart: #{user.cart.total} product/s
+                div(id="header")
+                    h3 Cart: #{user.cart.items.length} product/s
+                    div(id="functions")
+                        form(method='POST' action='/user/cart/delete-all')
+                            input(type="hidden", name="userid", value=user._id)
+                            input(type="submit", value="Clear cart") 
+                        form(method='GET' action='/')
+                            input(type="hidden", name="username", value=user.username)
+                            input(type="hidden", name="password", value=user.password)
+                            input(type="submit", value="Back to shopping")               
+                        form(method='POST' action='/user/order')
+                            input(type="hidden", name="userid", value=user._id)
+                            input(type="submit", value="Proceed order")
                 table
                     thead
                         tr
@@ -25,22 +53,46 @@ html(lang='en')
                             th price
                             th quantity
                             th total price
+                            th
                     tbody
-                        each row in user.cart.items
+                        each item in user.cart.items
                             tr         
                                 td
-                                    img(src=row.product.image, alt="product_img", style="height: 150px")
-                                td #{row.product.name}
-                                td #{row.product.category}
-                                td #{row.product.price} zł
-                                td #{row.quantity}
-                                td #{row.quantity*row.product.price} zł
+                                    img(src=item.product.image, alt="product_img", style="height: 150px")
+                                td #{item.product.name}
+                                td #{item.product.category}
+                                td #{item.product.price} zł
+                                td #{item.quantity}
+                                td #{item.quantity*item.product.price} zł
                                 td
-                                    form(method='GET' action='/product')
+                                    form(method='POST' action='/user/cart/modify')
+                                        label(for="quantity") Quantity:
+                                        br
+                                        input(type="text", name="quantity", maxlength="4", required)
+                                        br
                                         if user 
-                                            input(type="hidden", name="username", value=user.username)
-                                            input(type="hidden", name="password", value=user.password)
-                                        input(type="hidden", name="productid", value=row.product._id)
-                                        input(type="submit", value="Show product")
-
-                                
+                                            input(type="hidden", name="userid", value=user._id)
+                                        input(type="hidden", name="productid", value=item.product._id)
+                                        input(type="submit", value="Change quantity")
+                                    form(method='POST' action='/user/cart/delete')
+                                        if user 
+                                            input(type="hidden", name="userid", value=user._id)
+                                        input(type="hidden", name="productid", value=item.product._id)
+                                        input(type="submit", value="Delete from cart")                         
+                        
+                        tr 
+                            td 
+                            td 
+                            td 
+                            td 
+                                hr
+                                p 
+                                    b TOTAL:
+                            td 
+                                hr
+                                p #{user.cart.totalQuantity}
+                            td 
+                                hr
+                                p #{user.cart.totalPrice} zł
+                            td  
+                        
