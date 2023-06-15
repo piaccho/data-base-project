@@ -48,7 +48,6 @@ import indexRouter from './src/routes/indexRouter.js';
 import authRouter from './src/routes/authRouter.js';
 import userRouter from './src/routes/userRouter.js';
 import adminRouter from './src/routes/adminRouter.js';
-import authController from '#root/src/controllers/authController.js';
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

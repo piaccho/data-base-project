@@ -25,108 +25,215 @@ Część mock danych zostało wygenerowane przy pomocy [JSON GENERATOR](https://
 Kolekcja "users" przechowuje informacje o poszczególnych użytkownikach w systemie. Każdy dokument reprezentuje jednego użytkownika i zawiera jego dane osobowe, informacje dotyczące konta, koszyka, zamówień itp.
 
 Opis:
+- `_id` : ObjectId (identyfikator użytkownika)
+- `firstname` : String (imię użytkownika)
+- `lastname` : String (nazwisko użytkownika)
+- `email` : String (adres e-mail użytkownika)
+- `phone` : String (numer telefonu użytkownika)
+- `address` : String (adres użytkownika)
+- `username` : String (nazwa użytkownika)
+- `password` : String (hasło użytkownika)
+- `role` : String (rola użytkownika)
+- `preferedpayment` : String (preferowany sposób płatności)
+- `cart` : Object (koszyk użytkownika)
+    - `totalQuantity` : Number (łączna ilość przedmiotów w koszyku)
+    - `totalPrice` : Number (łączna cena przedmiotów w koszyku)
+    - `items` : Array (tablica przedmiotów w koszyku)
+        - `product` : Object (informacje o produkcie) (kolekcja 'product')
+            - `name` : String (nazwa produktu)
+            - `category` : String (kategoria produktu)
+            - `description` : String (opis produktu)
+            - `price` : Number (cena produktu)
+            - `units` : Number (dostępna ilość produktu)
+            - `image` : String (URL do zdjęcia produktu)
+            - `reviews` : Array (tablica recenzji produktu)
+                - `username` : String (nazwa użytkownika recenzującego)
+                - `rating` : Number (ocena produktu)
+                - `description` : String (opis recenzji)
+                - `createdDate` : Date (data utworzenia recenzji)
+                - `_id` : ObjectId (identyfikator recenzji)
+            - `_id` : ObjectId (identyfikator produktu)
+        - `quantity` : Number (ilość danego produktu w koszyku)
+        - `_id` : ObjectId (identyfikator elementu koszyka)
+- `registerDate` : Date (data rejestracji użytkownika)
+- `orders` : Array (tablica zamówień użytkownika) (kolekcja 'order')
+    - `user` : ObjectId (identyfikator użytkownika)
+    - `products` : Array (tablica produktów w zamówieniu)
+        - `product` : ObjectId (identyfikator produktu)
+        - `quantity` : Number (ilość danego produktu w zamówieniu)
+        - `_id` : ObjectId (identyfikator elementu zamówienia)
+    - `totalQuantity` : Number (łączna ilość przedmiotów w zamówieniu)
+    - `totalPrice` : Number (łączna cena przedmiotów w zamówieniu)
+    - `address` : String (adres dostawy zamówienia)
+    - `status` : String (status zamówienia)
+    - `_id` : ObjectId (identyfikator zamówienia)
 
-- `_id`: Unikalny identyfikator dokumentu.
+<br/>
+<br/>
 
-- `firstname`: Imię użytkownika. 
-
-- `lastname`: Nazwisko użytkownika. 
-
-- `email`: Adres e-mail użytkownika.
-
-- `phone`: Numer telefonu użytkownika. 
-
-- `address`: Adres użytkownika. 
-
-- `username`: Nazwa użytkownika. 
-
-- `password`: Hasło użytkownika. 
-
-- `role`: Rola użytkownika. (admin, user)
-
-- `preferedpayment`: Preferowany sposób płatności użytkownika. ("on-delivery", "card", "paypal").
-
-- `cart`: Obiekt zawierający informacje o koszyku użytkownika.
-
-    - `totalquantity`: Całkowita liczba produktów w koszyku.
-    - `totalprice`: Całkowita cena produktów w koszyku. 
-    - `items`: Tablica zawierająca przedmioty w koszyku. 
-
-- `registerDate`: Data rejestracji użytkownika.
-
-- `wishlists`: Tablica zawierająca listy życzeń użytkownika. 
-
-- `orders`: Tablica zawierająca zamówienia użytkownika.
-
+Przykładowy dokument: Dokument przedstawia użytkownika, który posiada w koszyku 2 różne produkty
 ```json
 {
   "_id": {
-    "$oid": "648a7599d2b13ac54a17d1a4"
+    "$oid": "648ad0038026b16839f61d3f"
   },
-  "firstname": "Jan",
-  "lastname": "Kowalski",
-  "email": "admin@onet.pl",
-  "phone": "555999555",
-  "address": "ul. Kijowska 15, 30-100 Kraków",
-  "username": "admin",
-  "password": "admin123",
-  "role": "admin",
+  "firstname": "Łukasz",
+  "lastname": "Dydek",
+  "email": "dydek@onet.pl",
+  "phone": "123132213",
+  "address": "Kolorowa 86, 32-091 Kraków",
+  "username": "dydek",
+  "password": "dydek123",
+  "role": "user",
   "preferedpayment": "on-delivery",
   "cart": {
-    "totalquantity": 0,
-    "totalprice": 0,
-    "items": []
+    "totalQuantity": 7,
+    "totalPrice": 8400,
+    "items": [
+      {
+        "product": {
+          "name": "Piłka nożna Adidas",
+          "category": "Sport i rekreacja",
+          "description": "Piłka nożna Adidas to profesjonalna piłka do gry w piłkę nożną. Wykonana z wysokiej jakości materiałów, zapewniających trwałość i doskonałe właściwości piłki. Posiada atrakcyjny design i spełnia standardy wyznaczone przez federację piłkarską.",
+          "price": 200,
+          "units": 98,
+          "image": "https://fakeimg.pl/350x300/?font_size=30&text=Pi%C5%82ka+no%C5%BCna+Adidas",
+          "reviews": [],
+          "_id": {
+            "$oid": "6489f758d5afb1c46cab85df"
+          }
+        },
+        "quantity": 5,
+        "_id": {
+          "$oid": "648ad2008026b16839f61de1"
+        }
+      },
+      {
+        "product": {
+          "name": "Smartfon iPhone 14 Pro",
+          "category": "Elektronika",
+          "description": "Smartfon iPhone 14 Pro to najnowszy model telefonu marki Apple. Wyposażony w zaawansowany procesor, duży ekran o wysokiej rozdzielczości oraz innowacyjny system operacyjny. Posiada doskonałą jakość wykonania i wiele funkcji, które umożliwiają korzystanie z najnowszych technologii.",
+          "price": 3700,
+          "units": 69,
+          "image": "https://fakeimg.pl/350x300/?font_size=30&text=Smartfon%20iPhone%20X",
+          "reviews": [
+            {
+              "username": "piacho",
+              "rating": 1,
+              "description": "Okropny sprzęt",
+              "createdDate": {
+                "$date": "2023-06-15T03:53:24.792Z"
+              },
+              "_id": {
+                "$oid": "648a8b34b7c02e2425d47070"
+              }
+            },
+            {
+              "username": "dydek",
+              "rating": 4,
+              "description": "Całkiem spoko smartfonik",
+              "createdDate": {
+                "$date": "2023-06-15T04:06:14.991Z"
+              },
+              "_id": {
+                "$oid": "648a8e369aa340130d6086d4"
+              }
+            }
+          ],
+          "_id": {
+            "$oid": "6489f758d5afb1c46cab85bb"
+          }
+        },
+        "quantity": 2,
+        "_id": {
+          "$oid": "648af0138026b16839f61e95"
+        }
+      }
+    ]
   },
   "registerDate": {
-    "$date": "2023-06-15T02:21:13.762Z"
+    "$date": "2023-06-15T08:46:59.600Z"
   },
-  "wishlists": [],
-  "orders": [],
+  "orders": [
+    {
+      "user": {
+        "$oid": "648ad0038026b16839f61d3f"
+      },
+      "products": [
+        {
+          "product": {
+            "$oid": "6489f758d5afb1c46cab85d6"
+          },
+          "quantity": 2,
+          "_id": {
+            "$oid": "648ad1b98026b16839f61dc2"
+          }
+        },
+        {
+          "product": {
+            "$oid": "6489f758d5afb1c46cab85df"
+          },
+          "quantity": 2,
+          "_id": {
+            "$oid": "648ad1b98026b16839f61dc3"
+          }
+        }
+      ],
+      "totalQuantity": 4,
+      "totalPrice": 600,
+      "address": "Legionowa 86, 32-091 Michałowice",
+      "status": "pending",
+      "_id": {
+        "$oid": "648ad1b98026b16839f61dc1"
+      },
+      "__v": 0
+    }
+  ],
 }
 ```
+<br/>
+<br/>
 
 ### 2. ***categories*** (Kategorie):
 Kolekcja "categories" przechowuje informacje o kategoriach produktów w systemie. Każdy dokument reprezentuje jeden produkt i zawiera jego nazwę.
 
 Opis:
-- `_id`: Unikalny identyfikator dokumentu.
+- `_id`: ObjectId (identyfikator kategorii)
+- `name`: String (nazwa kategorii) 
+<br/>
+<br/>
 
-- `firstname`: Nazwa kategorii. 
-
-Przykładowy dokument
+Przykładowy dokument:
 ```json
 {
     "_id": 1,
     "name": "Elektronika"
 }
 ```
+<br/>
+<br/>
+
 ### 3. ***products*** (Produkty):
 Kolekcja "products" przechowuje informacje o poszczególnych produktach w systemie. Każdy dokument reprezentuje jeden produkt i zawiera jego nazwę, kategorię, opis, cenę, dostępną liczbę sztuk, obraz przedstawiający produkt oraz opinie użytkowników na jego temat.
 
 Opis:
-- `_id`: Unikalny identyfikator dokumentu w kolekcji.
+- `_id` : ObjectId (identyfikator produktu)
+- `name` : String (nazwa produktu)
+- `category` : String (kategoria produktu)
+- `description` : String (opis produktu)
+- `price` : Number (cena produktu)
+- `units` : Number (dostępna ilość produktu)
+- `image` : String (URL do zdjęcia produktu)
+- `reviews` : Array (tablica recenzji produktu)
+    - `username` : String (nazwa użytkownika recenzującego)
+    - `rating` : Number (ocena produktu)
+    - `description` : String (opis recenzji)
+    - `createdDate` : Date (data utworzenia recenzji)
+    - `_id` : ObjectId (identyfikator recenzji)
+<br/>
+<br/>
 
-- `name`: Nazwa produktu.
-
-- `category`: Kategoria produktu.
-
-- `description`: Opis produktu.
-
-- `price`: Cena produktu.
-
-- `units`: Dostępna liczba sztuk produktu.
-
-- `image`: Adres URL obrazu przedstawiającego produkt. 
-
-- `reviews`: Tablica zawierająca opinie na temat produktu.
-
-    - `username`: Nazwa użytkownika, który wystawił opinię. 
-    - `rating`: Ocena produktu w skali od 1 do 5.
-    description: Treść opinii na temat produktu. 
-    - `createdDate`: Data utworzenia opinii.
-    - `_id`: Unikalny identyfikator opinii.
-
-Przykładowy dokument
+Przykładowy dokument: Dokument przedstawia produkt smartfona z dwoma recenzjami.
 ```json
 {
   "_id": {
@@ -161,69 +268,63 @@ Przykładowy dokument
         "$oid": "648a8e369aa340130d6086d4"
       }
     },
-  ],
-  "__v": 5
+  ]
 }
 ```
+<br/>
+<br/>
 
 ### 4. ***orders*** (Zamówienia):
 Kolekcja "orders" przechowuje informacje o zamówieniach w systemie. Każdy dokument reprezentuje jedno zamówienie i zawiera informacje o użytkowniku składającym zamówienie, produktach zamówionych wraz z ich ilością, łącznej liczbie sztuk, łącznej cenie, adresie dostawy i statusie zamówienia.
 
 Opis:
-- `_id`: Unikalny identyfikator dokumentu w kolekcji, wygenerowany automatycznie przez MongoDB.
+- `_id` : ObjectId (identyfikator zamówienia)
+- `user` : ObjectId (identyfikator użytkownika składającego zamówienie) (referencja do kolekcji 'users')
+- `products` : Array (tablica produktów w zamówieniu) 
+    - `product` : ObjectId (identyfikator produktu) (referencja do kolekcji 'products')
+    - `quantity` : Number (ilość produktu w zamówieniu)
+    - `_id` : ObjectId (identyfikator elementu w tablicy)
+- `totalQuantity` : Number (łączna ilość produktów w zamówieniu)
+- `totalPrice` : Number (łączna cena zamówienia)
+- `address` : String (adres dostawy zamówienia)
+- `status` : String (status zamówienia)
+<br/>
+<br/>
 
-- `user`: Obiekt zawierający informacje o użytkowniku składającym zamówienie. Reprezentowany przez unikalny identyfikator użytkownika w kolekcji "users".
-
-- `products`: Tablica zawierająca informacje o produktach w zamówieniu.
-
-    - `product`: Obiekt zawierający informacje o konkretnym produkcie reprezentowany przez unikalny identyfikator produktu w kolekcji "products".
-    - `quantity`: Ilość sztuk danego produktu w zamówieniu. 
-    - `_id`: Unikalny identyfikator elementu zamówienia.
-
-- `totalQuantity`: Całkowita liczba sztuk produktów w zamówieniu. 
-
-- `totalPrice`: Całkowita cena zamówienia. 
-
-- `address`: Adres dostawy zamówienia.
-
-- `status`: Status zamówienia. ("pending", "shipping", "delivered").
-
-Przykładowy dokument
+Przykładowy dokument: Dokument przedstawia zamówienie na dwa produkty na konkretnego użytkownika
 ```json
 {
   "_id": {
-    "$oid": "648a9d61191a9438fc9dab51"
+    "$oid": "648ad1b98026b16839f61dc1"
   },
   "user": {
-    "$oid": "648a43ff6af17772750690e9"
+    "$oid": "648ad0038026b16839f61d3f"
   },
   "products": [
     {
       "product": {
-        "$oid": "6489f758d5afb1c46cab85bb"
+        "$oid": "6489f758d5afb1c46cab85d6"
       },
-      "quantity": 1,
+      "quantity": 2,
       "_id": {
-        "$oid": "648a9d61191a9438fc9dab52"
+        "$oid": "648ad1b98026b16839f61dc2"
       }
     },
     {
       "product": {
-        "$oid": "6489f758d5afb1c46cab85bc"
+        "$oid": "6489f758d5afb1c46cab85df"
       },
-      "quantity": 1,
+      "quantity": 2,
       "_id": {
-        "$oid": "648a9d61191a9438fc9dab53"
+        "$oid": "648ad1b98026b16839f61dc3"
       }
     }
   ],
-  "totalQuantity": 2,
-  "totalPrice": 8100,
-  "address": "Słopnice 1000, 34-615 Słopnice",
-  "status": "pending",
+  "totalQuantity": 4,
+  "totalPrice": 600,
+  "status": "pending"
 }
 ```
-
 
 
 ## Najciekawsze endpointy

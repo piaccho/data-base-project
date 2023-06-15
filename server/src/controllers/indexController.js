@@ -1,5 +1,6 @@
 import Category from '#root/src/models/categoryModel.js'
-import Product, { Review } from '#root/src/models/productModel.js'
+import Product from '#root/src/models/productModel.js'
+import Review from '#root/src/models/reviewModel.js'
 
 import { isTokenValid, signinUser, signinUserId, userQuery } from '#root/src/util/utility.js'
 
@@ -83,6 +84,7 @@ const indexController = {
 
         product.reviews.push(newReview);
 
+        await newReview.save();
         await product.save();
 
         res.redirect("/product" + userQuery(user) + "&productid=" + productid);
