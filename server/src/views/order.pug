@@ -1,0 +1,70 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title Order - WebShop server
+        style(type='text/css').
+            table {
+                width: 100vw;
+                margin: 0 20px;
+            }
+            #header {
+                display: flex;
+                justify-content: space-between;
+                margin: 0 20px;
+            }
+            #functions {
+                display: flex;
+            }
+            td {
+                text-align: center;
+            }
+    body
+        form(method='GET' action='/')
+            if user
+                input(type="hidden", name="username", value=user.username)
+                input(type="hidden", name="password", value=user.password)
+            input(type='submit', value="Main page")
+        h1 WebShop server - Order route
+        main
+            table
+                thead
+                    tr
+                        th 
+                        th name
+                        th category
+                        th price
+                        th quantity
+                        th total price
+                        th
+                tbody
+                    each item in user.cart.items
+                        tr         
+                            td
+                                img(src=item.product.image, alt="product_img", style="height: 150px")
+                            td #{item.product.name}
+                            td #{item.product.category}
+                            td #{item.product.price} zł
+                            td #{item.quantity}
+                            td #{item.quantity*item.product.price} zł
+                    tr 
+                        td 
+                        td 
+                        td 
+                        td 
+                            hr
+                            p 
+                                b TOTAL:
+                        td 
+                            hr
+                            p #{user.cart.totalQuantity}
+                        td 
+                            hr
+                            p #{user.cart.totalPrice} zł
+            form(method='POST' action='/user/order/submit' style="float: right; height:20px")
+                if user 
+                    input(type="hidden", name="userid", value=user._id)
+                input(type="submit", value="Submit order / Pay" style="height:30px")                         
+
+                    

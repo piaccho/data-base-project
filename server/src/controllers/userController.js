@@ -13,8 +13,11 @@ const userController = {
     },
 
     getOrdersIndex: async (req, res) => {
-        // const categories = await Category.find({});
-        res.render('orders');
+        const userid = req.query.userid;
+        const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" });
+
+        res.render('orders', { user: user })
     },
 
     getWishlistsIndex: async (req, res) => {
@@ -31,8 +34,8 @@ const userController = {
         const { userid } = req.body;
         const user = await signinUserId(userid);
         
-        user.cart.totalquantity = 0;
-        user.cart.totalprice = 0;
+        user.cart.totalQuantity = 0;
+        user.cart.totalPrice = 0;
         user.cart.items = [];
         await user.save();
 
@@ -95,8 +98,63 @@ const userController = {
         res.redirect("/user/cart" + userQuery(user));
     },
 
+    getOrderIndex: async (req, res) => {
+        const userid = req.query.userid;
+        const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" });
+
+        res.render('order', { user: user });
+    },
+
     proceedOrder: async (req, res) => {
-        // res.render('product', { product: product });
+        console.log(req.body);
+        const userid = req.body.userid;
+        const user = await signinUserId(userid);
+        if (!user) res.status(400).json({ status: "You are not logged in" });
+
+        let total = 0;
+        for (const item of user.cart.items) {
+            const productId = item.product._id;
+            const quantity = item.quantity;
+
+            const product = await Product.findById(productId);
+            if (!product) {
+                console.log(`Couldnt find product ${productId}.`);
+                continue;
+            }
+
+            product.units -= quantity;
+            total = quantity * product.price;
+
+            await product.save();
+
+            console.log(`Updated product units ${product.name}.`);
+        }
+
+        user.cart.items.forEach(item => {console.log(item);})
+
+        const newOrder = new Order({
+            user: user,
+            products: user.cart.items.map(item => ({
+                product: item.product,
+                quantity: item.quantity,
+            })),
+            totalQuantity: user.cart.totalQuantity,
+            totalPrice: user.cart.totalPrice,
+            address: user.address,
+            status: 'pending',
+        });
+
+
+        await newOrder.save();
+
+        user.cart.totalQuantity = 0;
+        user.cart.totalPrice = 0;
+        user.cart.items = [];
+        user.orders.push(newOrder);
+        await user.save();
+
+        res.redirect("/" + userQuery(user));
     },
 };
 

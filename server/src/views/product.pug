@@ -58,7 +58,9 @@ html(lang='en')
                 div
                     h2 #{product.category}
                     h1 #{product.name}
-                    //- p #{product.}
+                    fieldset
+                        p Avg rating: #{avgRating}/5 
+                        p Reviews number: #{product.reviews.length}
                     p #{product.description}
                     h3 Price: #{product.price} zł
                     p Available units: #{product.units}

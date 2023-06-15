@@ -60,7 +60,7 @@ const indexController = {
             averageRating = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
         }
 
-        res.render('product', { product: product, user: user, avgRating: averageRating });
+        res.render('product', { product: product, user: user, avgRating: averageRating.toFixed(2) });
     },
 
     postReview: async (req, res) => {
@@ -85,7 +85,7 @@ const indexController = {
 
         await product.save();
 
-        res.redirect("/products" + userQuery(user));
+        res.redirect("/product" + userQuery(user) + "&productid=" + productid);
     },
 
     addProductToCart: async (req, res) => {

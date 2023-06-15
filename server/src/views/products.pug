@@ -19,6 +19,9 @@ html(lang='en')
             #nav input {
                 width: 150px;
             }
+            td {
+                text-align: center;
+            }
     body
         form(method='GET' action='/')
             if user
@@ -60,6 +63,13 @@ html(lang='en')
                             th name
                             th category
                             th price
+                                form(method='GET' action='/products/sort')
+                                    if price === "asc"
+                                        input(type="hidden", name="price", value="dsc")
+                                        input(type="submit", value="v")
+                                    else
+                                        input(type="hidden", name="price", value="asc")
+                                        input(type="submit", value="∧")
                     tbody
                         each row in data
                             tr         

@@ -25,7 +25,10 @@ router.post('/cart/modify', userController.modifyCartItem);
 // clear cart 
 router.post('/cart/delete', userController.deleteCartItem);
 
+// get order page 
+router.get('/order', userController.getOrderIndex);
+
 // proceed order
-router.post('/order', userController.proceedOrder);
+router.post('/order/submit', userController.proceedOrder);
 
 export default router;

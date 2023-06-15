@@ -41,9 +41,10 @@ html(lang='en')
                             input(type="hidden", name="username", value=user.username)
                             input(type="hidden", name="password", value=user.password)
                             input(type="submit", value="Back to shopping")               
-                        form(method='POST' action='/user/order')
-                            input(type="hidden", name="userid", value=user._id)
-                            input(type="submit", value="Proceed order")
+                        form(method='GET' action='/user/order')
+                            if user
+                                input(type="hidden", name="userid", value=user._id)
+                            input(type="submit", value="Submit order")
                 table
                     thead
                         tr
