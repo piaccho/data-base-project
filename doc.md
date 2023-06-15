@@ -1,3 +1,5 @@
+Projekt ten jest aplikacją internetowa sklepu internetowego, który umożliwia użytkownikom rejestrację, logowanie oraz przeglądanie i wyszukiwanie produktów. Użytkownicy mogą składać zamówienia na podstawie zawartości koszyka, a także wystawiać oceny i recenzje produktów. Istnieje również panel administracyjny, który umożliwia zarządzanie produktami, kategoriami i innymi elementami systemu.
+
 # Dokumentacja
 Backend naszego projektu oparty jest o serwer w technologii `Node.js` z frameworkiem `Express.js` oraz bazą danych w technologii `MongoDB` 
 
